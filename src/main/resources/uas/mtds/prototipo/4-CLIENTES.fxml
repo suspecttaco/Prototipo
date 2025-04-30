@@ -11,14 +11,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox stylesheets="@css/primer-light.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="750.0" spacing="30.0" VBox.vgrow="ALWAYS">
+      <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="750.0" spacing="30.0" stylesheets="@css/primer-light.css" VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fitHeight="249.0" fitWidth="291.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="282.0" fitWidth="287.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/libretas-de-direcciones.png" />
+                  <Image url="@images/buscar.png" />
                </image>
             </ImageView>
             <VBox prefHeight="200.0" prefWidth="342.0" spacing="10.0" HBox.hgrow="ALWAYS">
@@ -27,18 +26,21 @@
                      <children>
                         <Label text="Buscar: " HBox.hgrow="ALWAYS">
                            <font>
-                              <Font name="Roboto Medium" size="14.0" />
+                              <Font size="18.0" />
                            </font>
                         </Label>
-                        <TextField prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                        <TextField prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font size="18.0" />
+                           </font></TextField>
                      </children>
                   </HBox>
                   <ListView VBox.vgrow="ALWAYS" />
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button mnemonicParsing="false" text="Seleccionar">
+                        <Button mnemonicParsing="false" prefWidth="200.0" text="Seleccionar">
                            <font>
-                              <Font name="Roboto Medium" size="14.0" />
+                              <Font size="18.0" />
                            </font>
                         </Button>
                      </children>

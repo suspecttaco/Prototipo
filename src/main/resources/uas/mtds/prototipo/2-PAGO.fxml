@@ -53,9 +53,9 @@
    <children>
       <VBox alignment="TOP_CENTER">
          <children>
-            <Label text="Cafeteria bien pro" textAlignment="CENTER">
+            <Label text="Punto de Venta" textAlignment="CENTER">
                <font>
-                  <Font name="System Bold" size="32.0" />
+                  <Font name="Bookman Old Style" size="32.0" />
                </font>
             </Label>
             <Label text="--Slogan aqui--">
