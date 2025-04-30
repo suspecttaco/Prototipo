@@ -15,20 +15,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox stylesheets="@css/primer-light.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox stylesheets="@css/nord-light.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
          <children>
-            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+            <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
                <image>
-                  <Image url="@images/verificar.png" />
+                  <Image url="@images/carrito-de-compras.png" />
                </image>
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </ImageView>
-            <GridPane prefWidth="350.0">
+            <GridPane prefWidth="350.0" vgap="10.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.73330688476562" minWidth="10.0" prefWidth="89.60001220703126" />
                 <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="282.39996337890625" minWidth="10.0" prefWidth="260.79998779296875" />
@@ -56,13 +55,13 @@
                         <Font name="Roboto Medium" size="14.0" />
                      </font>
                   </Label>
-                  <TextArea prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextArea prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
                   <Button alignment="CENTER" mnemonicParsing="false" prefHeight="14.0" prefWidth="142.0" text="Guardar" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="Roboto Medium" size="16.0" />
                      </font>
                   </Button>
-                  <Spinner prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Spinner editable="true" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>
