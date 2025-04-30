@@ -12,7 +12,12 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -70,31 +75,83 @@
          <children>
             <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                <children>
-                  <Label text="Productos">
-                     <font>
-                        <Font name="Roboto Medium" size="24.0" />
-                     </font></Label>
-                  <ListView VBox.vgrow="ALWAYS" />
-                  <HBox alignment="CENTER" prefHeight="36.0" prefWidth="289.0">
+                  <HBox alignment="CENTER_RIGHT">
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="256.0" text="Buscar">
-                           <font>
-                              <Font name="Roboto" size="16.0" />
-                           </font>
+                        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label contentDisplay="RIGHT" nodeOrientation="LEFT_TO_RIGHT" text="Productos">
+                                 <font>
+                                    <Font name="Roboto Medium" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Button mnemonicParsing="false" wrapText="true">
+                           <graphic>
+                              <ImageView nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/busqueda.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="82.0" text="..." />
                      </children>
                   </HBox>
+                  <ListView VBox.vgrow="ALWAYS" />
+                  <GridPane>
+                     <columnConstraints>
+                        <ColumnConstraints fillWidth="false" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints fillHeight="false" />
+                     </rowConstraints>
+                  </GridPane>
                </children>
             </VBox>
-            <Separator orientation="VERTICAL" />
+            <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                <children>
-                  <Label text="Pedido">
-                     <font>
-                        <Font name="Roboto Medium" size="24.0" />
-                     </font></Label>
-                  <TableView prefHeight="400.0" prefWidth="363.0" VBox.vgrow="ALWAYS">
+                  <HBox alignment="CENTER_RIGHT">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Pedido">
+                                 <font>
+                                    <Font name="Roboto Medium" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <Button mnemonicParsing="false" wrapText="true">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/busqueda.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" wrapText="true">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/lapiz.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button mnemonicParsing="false" wrapText="true">
+                           <graphic>
+                              <ImageView pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/basura.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <TableView VBox.vgrow="ALWAYS">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Producto" />
                       <TableColumn prefWidth="75.0" text="Cantidad" />
@@ -105,21 +162,9 @@
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <HBox alignment="TOP_CENTER" prefHeight="36.0" prefWidth="289.0">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="184.0" text="Quitar">
-                           <font>
-                              <Font name="Roboto" size="16.0" />
-                           </font></Button>
-                        <Button mnemonicParsing="false" prefHeight="36.0" prefWidth="173.0" text="Editar">
-                           <font>
-                              <Font name="Roboto" size="16.0" />
-                           </font></Button>
-                     </children>
-                  </HBox>
                </children>
             </VBox>
-            <Separator orientation="VERTICAL" />
+            <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS" />
             <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="Hora &amp; Fecha">
@@ -179,7 +224,32 @@
          </padding>
       </HBox>
       <Separator prefWidth="200.0" />
-      <HBox prefHeight="58.0" prefWidth="1158.0" />
+      <HBox alignment="CENTER_RIGHT" spacing="20.0" VBox.vgrow="SOMETIMES">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         <children>
+            <GridPane HBox.hgrow="ALWAYS">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="2" />
+                  <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="3" />
+               </children>
+            </GridPane>
+         </children></HBox>
       <Separator prefWidth="200.0" />
    </children>
    <stylesheets>
