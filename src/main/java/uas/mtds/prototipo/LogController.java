@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
@@ -31,7 +32,11 @@ public class LogController {
             stage.setMaximized(true);
             stage.show();
         } else {
-            System.out.println("Usuario no autenticado");
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error de autenticación");
+            alerta.setHeaderText("Usuario o contraseña incorrectos");
+            alerta.setContentText("Por favor, verifica tus credenciales e intenta nuevamente.");
+            alerta.showAndWait();
         }
     }
 }
