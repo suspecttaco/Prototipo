@@ -24,7 +24,7 @@ public class LogController {
             Stage root = (Stage) ((Node) event.getSource()).getScene().getWindow();
             root.close();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(PosApplication.class.getResource("1-POS.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("1-POS.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Punto de venta");

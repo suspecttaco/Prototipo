@@ -1,6 +1,6 @@
 package uas.mtds.prototipo;
 
-import atlantafx.base.theme.CupertinoLight;
+import atlantafx.base.theme.PrimerLight;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,11 +9,12 @@ import javafx.stage.Stage;
 public class LogApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Application.setUserAgentStylesheet(new CupertinoLight().getUserAgentStylesheet());
+        Application.setUserAgentStylesheet(new PrimerLight().getUserAgentStylesheet());
         FXMLLoader fxmlLoader = new FXMLLoader(LogApplication.class.getResource("7-LOGIN.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Login");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 

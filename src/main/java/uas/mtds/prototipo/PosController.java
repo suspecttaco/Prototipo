@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -98,7 +99,7 @@ public class PosController {
         owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("8-BUSCAR.fxml")));
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("8-BUSCAR.fxml"))));
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.setTitle("Inventario");
@@ -127,10 +128,22 @@ public class PosController {
     }
 
     @FXML
-    public void actionSalir() {
+    public void actionSalir(ActionEvent event) throws IOException {
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
         alerta.setContentText("Esta seguro que desea cerrar la sesion?");
-        alerta.show();
         alerta.setHeaderText(null);
+//        alerta.show();
+
+        if (alerta.showAndWait().orElse(null) == ButtonType.OK) {
+            if (event.getSource() instanceof Node) {
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("1-LOGIN.fxml")));
+                stage.setScene(new Scene(root));
+                stage.setTitle("Login");
+                stage.setResizable(false);
+                stage.show();
+            }
+        }
     }
 }
