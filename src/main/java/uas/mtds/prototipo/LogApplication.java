@@ -5,15 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class PosApplication extends Application {
-
+public class LogApplication extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(PosApplication.class.getResource("1-POS.fxml"));
+    public void start(Stage stage) throws Exception {
+        FXMLLoader fxmlLoader = new FXMLLoader(LogApplication.class.getResource("7-LOGIN.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Punto de venta");
+        stage.setTitle("Login");
         stage.setScene(scene);
         stage.show();
     }
@@ -21,4 +18,9 @@ public class PosApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+    public void stop() {
+        System.exit(0);
+    }
+
 }

@@ -15,12 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/primer-light.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@css/cupertino-light.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uas.mtds.prototipo.LogController">
    <children>
       <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
          <children>
-            <VBox prefHeight="400.0" prefWidth="143.0">
+            <VBox fx:id="vbox" alignment="CENTER" prefHeight="400.0" prefWidth="229.0" style="-fx-background-color: #5c3d2e;">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -30,6 +29,11 @@
                         <Image url="@images/granos-de-cafe.png" />
                      </image>
                   </ImageView>
+                  <Label text="Punto de Venta">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
@@ -39,46 +43,49 @@
                <children>
                   <GridPane prefHeight="363.0" prefWidth="370.0">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="84.199951171875" minWidth="10.0" prefWidth="39.733349609375" />
                       <ColumnConstraints hgrow="ALWAYS" maxWidth="346.6666961669922" minWidth="290.600048828125" prefWidth="340.266650390625" />
                     </columnConstraints>
                     <rowConstraints>
-                      <RowConstraints maxHeight="140.9999755859375" minHeight="10.0" prefHeight="93.59999389648438" vgrow="ALWAYS" />
-                      <RowConstraints maxHeight="116.00000610351563" minHeight="10.0" prefHeight="85.60000610351561" vgrow="ALWAYS" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+                      <RowConstraints vgrow="ALWAYS" />
+                      <RowConstraints vgrow="ALWAYS" />
+                      <RowConstraints maxHeight="39.0" minHeight="10.0" prefHeight="39.0" vgrow="ALWAYS" />
+                        <RowConstraints minHeight="10.0" vgrow="ALWAYS" />
+                        <RowConstraints vgrow="ALWAYS" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
                     </rowConstraints>
                      <children>
-                        <Label alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="86.0" prefWidth="338.0" text="Ingrese sus credenciales para acceder al sistema" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Label alignment="TOP_LEFT" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="80.0" text="Ingrese sus credenciales para acceder al sistema" GridPane.rowIndex="1">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Bienvenido de nuevo" GridPane.columnIndex="1">
+                        <Label alignment="BOTTOM_LEFT" contentDisplay="CENTER" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Bienvenido de nuevo">
                            <font>
                               <Font size="30.0" />
                            </font>
                         </Label>
-                        <Label text="Usuario" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Contraseña" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                        <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="36.0" prefWidth="239.0" text="Iniciar Sesión" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <CheckBox mnemonicParsing="false" text="Recordar mi sesión" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <ImageView fitHeight="32.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
-                           <image>
-                              <Image url="@images/avatar.png" />
-                           </image>
-                        </ImageView>
-                        <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
-                           <image>
-                              <Image url="@images/contrasena.png" />
-                           </image>
-                        </ImageView>
-                        <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Usuario" GridPane.rowIndex="2">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/avatar.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Label>
+                        <TextField fx:id="textUser" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="3" />
+                        <Label focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Contraseña" GridPane.rowIndex="4">
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/contrasena.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Label>
+                        <PasswordField fx:id="textPass" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="5" />
+                        <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Recordar mi sesión" GridPane.rowIndex="6" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionLogin" prefHeight="36.0" prefWidth="239.0" text="Iniciar Sesión" textAlignment="CENTER" GridPane.rowIndex="7" />
                      </children>
                   </GridPane>
                </children>

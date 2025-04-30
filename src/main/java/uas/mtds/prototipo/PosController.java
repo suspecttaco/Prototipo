@@ -29,7 +29,7 @@ public class PosController {
             @Override
             public void handle(long now) {
                 labelHora.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm a")));
-                labelFecha.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE   dd - LLLL - yyyy")));
+                labelFecha.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE   dd / LLLL / yyyy")));
             }
         };
         timer.start();
@@ -131,5 +131,6 @@ public class PosController {
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
         alerta.setContentText("Esta seguro que desea cerrar la sesion?");
         alerta.show();
+        alerta.setHeaderText(null);
     }
 }
