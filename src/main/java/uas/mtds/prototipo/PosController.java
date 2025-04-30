@@ -12,6 +12,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -34,6 +35,40 @@ public class PosController {
             }
         };
         timer.start();
+        // Ejecutar después de que la interfaz se haya inicializado
+        javafx.application.Platform.runLater(this::setupCloseHandler);
+    }
+
+    /**
+     * Configura el manejador del evento de cierre de ventana
+     */
+    private void setupCloseHandler() {
+        // Obtener la ventana actual
+        Stage currentStage = (Stage) Stage.getWindows().stream()
+                .filter(window -> window instanceof Stage && window.isShowing())
+                .findFirst()
+                .orElse(null);
+
+        if (currentStage != null) {
+            // Agregar el manejador de evento de cierre
+            currentStage.setOnCloseRequest(this::handleCloseRequest);
+        }
+    }
+
+    /**
+     * Maneja el evento de cierre de ventana
+     * @param event El evento de cierre de ventana
+     */
+    private void handleCloseRequest(WindowEvent event) {
+        // Consumir el evento para prevenir el cierre automático
+        event.consume();
+
+        // Reutilizar la función de cierre de sesión
+        try {
+            actionSalir();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -128,21 +163,31 @@ public class PosController {
     }
 
     @FXML
-    public void actionSalir(ActionEvent event) throws IOException {
+    public void actionSalir() throws IOException {
         Alert alerta = new Alert(Alert.AlertType.CONFIRMATION);
-        alerta.setContentText("Esta seguro que desea cerrar la sesion?");
+        alerta.setTitle("Cerrar sesión");
+        alerta.setContentText("¿Está seguro que desea cerrar la sesión?");
         alerta.setHeaderText(null);
-//        alerta.show();
 
         if (alerta.showAndWait().orElse(null) == ButtonType.OK) {
-            if (event.getSource() instanceof Node) {
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            // Buscar directamente la ventana activa principal
+            Stage currentStage = (Stage) Stage.getWindows().stream()
+                    .filter(window -> window instanceof Stage && window.isShowing())
+                    .findFirst()
+                    .orElse(null);
 
-                Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("1-LOGIN.fxml")));
-                stage.setScene(new Scene(root));
-                stage.setTitle("Login");
-                stage.setResizable(false);
-                stage.show();
+            if (currentStage != null) {
+                // Cerrar la ventana actual
+                currentStage.close();
+
+                // Crear una nueva instancia de la ventana de login
+                Stage loginStage = new Stage();
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("7-LOGIN.fxml"));
+                Scene scene = new Scene(fxmlLoader.load());
+                loginStage.setTitle("Login");
+                loginStage.setScene(scene);
+                loginStage.setResizable(false);
+                loginStage.show();
             }
         }
     }
