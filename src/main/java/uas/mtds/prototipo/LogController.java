@@ -35,7 +35,7 @@ public class LogController {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Error de autenticación");
             alerta.setHeaderText("Usuario o contraseña incorrectos");
-            alerta.setContentText("Por favor, verifica tus credenciales e intenta nuevamente.");
+            alerta.setContentText("Por favor, verifica tus credenciales e \nintenta nuevamente.");
             alerta.showAndWait();
         }
     }

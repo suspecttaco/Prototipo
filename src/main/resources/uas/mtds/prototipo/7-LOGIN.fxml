@@ -84,7 +84,7 @@
                               </ImageView>
                            </graphic></Label>
                         <PasswordField fx:id="textPass" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="5" />
-                        <CheckBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Recordar mi sesión" GridPane.rowIndex="6" />
+                        <CheckBox focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Recordar mi sesión" GridPane.rowIndex="6" />
                         <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionLogin" prefHeight="36.0" prefWidth="239.0" text="Iniciar Sesión" textAlignment="CENTER" GridPane.rowIndex="7" />
                      </children>
                   </GridPane>

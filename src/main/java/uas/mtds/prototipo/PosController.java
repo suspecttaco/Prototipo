@@ -31,7 +31,7 @@ public class PosController {
             @Override
             public void handle(long now) {
                 labelHora.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm a")));
-                labelFecha.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE   dd / LLLL / yyyy")));
+                labelFecha.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("EEEE - dd / LL / yyyy")));
             }
         };
         timer.start();
@@ -156,6 +156,26 @@ public class PosController {
         stage.initOwner(owner);
         stage.show();
     }
+
+    @FXML
+    public void actionCorte() throws IOException{
+        Stage currentStage = (Stage) Stage.getWindows().stream()
+                .filter(window -> window instanceof Stage && window.isShowing())
+                .findFirst()
+                .orElse(null);
+
+        if (currentStage != null) {
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("9-CORTE.fxml")));
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.setTitle("Finalizar Jornada");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(currentStage);
+            stage.show();
+        }
+    }
+
 
     @FXML
     public void actionEliminarPedido(ActionEvent event) throws IOException{
