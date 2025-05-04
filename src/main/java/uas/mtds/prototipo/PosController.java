@@ -70,7 +70,7 @@ public class PosController {
     private static final double PORCENTAJE_DESECHABLE = 0.10; // 10% adicional
 
 
-    private final ObservableList<Product>  pedidoProductos = FXCollections.observableArrayList();
+    private final ObservableList<Product> pedidoProductos = FXCollections.observableArrayList();
 
     public void initialize() {
 
@@ -177,8 +177,13 @@ public class PosController {
     public void actionCancelar(ActionEvent event) throws IOException {
         Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("3-CANCELAR.fxml"));
+        Parent root = loader.load();
+
+        AuthController authController = loader.getController();
+        authController.setPosController(this);
+
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("3-CANCELAR.fxml")));
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.setTitle("Autorizacion");
@@ -348,6 +353,7 @@ public class PosController {
 
     /**
      * Método público para actualizar los productos desde otra clase
+     *
      * @param products Lista de productos para mostrar
      */
     public void actualizarProductos(List<Product> products) {
@@ -412,7 +418,7 @@ public class PosController {
     private void agregarProductoAlPedido(Product producto) {
         // Buscar producto en la lista de productos
         for (Product p : pedidoProductos) {
-            if (p.getId().equals(producto.getId())){
+            if (p.getId().equals(producto.getId())) {
                 p.addUnidad(1);
                 tablePedido.refresh();
                 actualizarImportes();
