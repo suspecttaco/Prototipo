@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uas.mtds.prototipo.EditController">
    <children>
       <HBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
          <children>
@@ -44,7 +44,7 @@
                         <Font name="Roboto Medium" size="14.0" />
                      </font>
                   </Label>
-                  <ComboBox prefWidth="300.0" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="comboBoxProductos" prefWidth="300.0" GridPane.columnIndex="1" />
                   <Label text="Cantidad" GridPane.rowIndex="1">
                      <font>
                         <Font name="Roboto Medium" size="14.0" />
@@ -55,13 +55,13 @@
                         <Font name="Roboto Medium" size="14.0" />
                      </font>
                   </Label>
-                  <TextArea prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="14.0" prefWidth="142.0" text="Guardar" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                  <TextArea fx:id="textAreaNotas" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
+                  <Button fx:id="buttonGuardar" alignment="CENTER" mnemonicParsing="false" prefHeight="14.0" prefWidth="142.0" text="Guardar" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
                         <Font name="Roboto Medium" size="16.0" />
                      </font>
                   </Button>
-                  <Spinner editable="true" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Spinner fx:id="spinnerCantidad" editable="true" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

@@ -9,7 +9,8 @@ public class Product {
     private final String nombre;
     private Image imagen;
     private final double precio;
-    private int unidad = 1;
+    private int unidad;
+    private String notas;
 
     // Constructor completo
     public Product(String id, String nombre, double precio, String rutaImagen) {
@@ -59,5 +60,13 @@ public class Product {
 
     public void addUnidad(int unidad) {
         this.unidad += unidad;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
+    }
+
+    public String getNotas() {
+        return notas;
     }
 }

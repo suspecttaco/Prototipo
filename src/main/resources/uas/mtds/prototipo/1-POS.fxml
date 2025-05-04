@@ -138,7 +138,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#actionEliminarPedido" wrapText="true">
+                        <Button mnemonicParsing="false" onAction="#actionEliminarProducto" wrapText="true">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -151,10 +151,10 @@
                   </HBox>
                   <TableView fx:id="tablePedido" VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Producto" />
-                      <TableColumn prefWidth="75.0" text="Cantidad" />
-                        <TableColumn prefWidth="75.0" text="Importe" />
-                        <TableColumn prefWidth="75.0" text="Notas" />
+                      <TableColumn fx:id="columnProducto" prefWidth="75.0" text="Producto" />
+                      <TableColumn fx:id="columnCantidad" prefWidth="75.0" text="Cantidad" />
+                        <TableColumn fx:id="columnImporte" prefWidth="75.0" text="Importe" />
+                        <TableColumn fx:id="columnNotas" prefWidth="75.0" text="Notas" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -163,7 +163,7 @@
                </children>
             </VBox>
             <Separator orientation="VERTICAL" HBox.hgrow="ALWAYS" />
-            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="Hora &amp; Fecha">
                      <font>
@@ -178,12 +178,13 @@
                   <Label fx:id="labelFecha" text="29/04/2025">
                      <font>
                         <Font name="System Bold" size="16.0" />
-                     </font></Label>
+                     </font>
+                  </Label>
                   <Separator prefWidth="200.0" />
                   <TableView fx:id="tableImporte" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="Concepto" />
-                      <TableColumn prefWidth="75.0" text="Monto" />
+                      <TableColumn fx:id="columnConcepto" prefWidth="75.0" text="Concepto" />
+                      <TableColumn fx:id="columnMonto" prefWidth="75.0" text="Monto" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

@@ -5,10 +5,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import uas.mtds.prototipo.ProductEngine.Product;
-import uas.mtds.prototipo.ProductEngine.ProductService;
-
-import java.util.List;
 
 public class LogApplication extends Application {
 
@@ -30,6 +26,5 @@ public class LogApplication extends Application {
     public void stop() {
         System.exit(0);
     }
-
 
 }

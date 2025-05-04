@@ -2,6 +2,7 @@ package uas.mtds.prototipo;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +23,7 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import uas.mtds.prototipo.Auxiliar.ConceptoImporte;
 import uas.mtds.prototipo.ProductEngine.Product;
 import uas.mtds.prototipo.ProductEngine.ProductService;
 
@@ -32,18 +34,44 @@ import java.util.List;
 import java.util.Objects;
 
 public class PosController {
-    private Stage owner;
+    //Hora & Fecha
     @FXML
     private Label labelHora;
     @FXML
     private Label labelFecha;
+    //Pedido
     @FXML
-    private TableView tablePedido;
+    private TableView<Product> tablePedido;
+    @FXML
+    private TableColumn<Product, String> columnProducto;
+    @FXML
+    private TableColumn<Product, String> columnCantidad;
+    @FXML
+    private TableColumn<Product, String> columnImporte;
+    @FXML
+    private TableColumn<Product, String> columnNotas;
+    //Productos
     @FXML
     private ScrollPane scrollProductos;
-
     private TilePane gridProductos;
     private ObservableList<Product> listaProductos;
+    //Tabla de monto total
+    @FXML
+    private TableView<ConceptoImporte> tableImporte;
+    @FXML
+    private TableColumn<ConceptoImporte, String> columnConcepto;
+    @FXML
+    private TableColumn<ConceptoImporte, String> columnMonto;
+    @FXML
+    private ToggleButton toggleParaLlevar;
+    @FXML
+    private TextField textTotal;
+
+    private ObservableList<ConceptoImporte> listaImportes = FXCollections.observableArrayList();
+    private static final double PORCENTAJE_DESECHABLE = 0.10; // 10% adicional
+
+
+    private ObservableList<Product> pedidoProductos = FXCollections.observableArrayList();
 
     public void initialize() {
         AnimationTimer timer = new AnimationTimer() {
@@ -58,19 +86,38 @@ public class PosController {
         // Ejecutar después de que la interfaz se haya inicializado
         Platform.runLater(this::setupCloseHandler);
 
+
+        // PARTE 1 - LISTA DE PRODUCTOS
         // Inicializar lista observable
         ProductService productoService = new ProductService();
-
-        // Opción 2: Cargar productos desde la base de datos
+        //Inicializar lista de productos
         List<Product> productos = productoService.cargarProductosDesdeBaseDeDatos();
-
         // Actualizar la cuadrícula de productos
-
-
         listaProductos = FXCollections.observableArrayList();
         // Configurar vista en cuadrícula
         configurarVistaEnCuadricula();
         actualizarProductos(productos);
+
+        //PARTE 2 - TABLA DE PEDIDOS
+        columnProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
+        columnCantidad.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getUnidad())));
+        columnImporte.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("$%.2f", cellData.getValue().getPrecio() * cellData.getValue().getUnidad())));
+        columnNotas.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNotas()));
+        // Enlazar el modelo de datos con el TableView
+        tablePedido.setItems(pedidoProductos);
+
+        //PARTE 3 - TABLA DE MONTOS TOTALES
+        // Configurar columnas de la tabla
+        columnConcepto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getConcepto()));
+        columnMonto.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("$%.2f", cellData.getValue().getImporte())));
+
+        // Enlazar el modelo de datos con la tabla
+        tableImporte.setItems(listaImportes);
+
+        // Listener para el toggle
+        toggleParaLlevar.selectedProperty().addListener((obs, oldValue, newValue) -> actualizarImportes());
+
+
     }
 
     /**
@@ -108,7 +155,7 @@ public class PosController {
 
     @FXML
     public void actionCobrar(ActionEvent event) throws IOException {
-        owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("2-PAGO.fxml")));
@@ -122,7 +169,7 @@ public class PosController {
 
     @FXML
     public void actionCancelar(ActionEvent event) throws IOException {
-        owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("3-CANCELAR.fxml")));
@@ -136,7 +183,7 @@ public class PosController {
 
     @FXML
     public void actionClientes(ActionEvent event) throws IOException {
-        owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("4-CLIENTES.fxml")));
@@ -150,7 +197,7 @@ public class PosController {
 
     @FXML
     public void actionCupon(ActionEvent event) throws IOException {
-        owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Stage stage = new Stage();
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("5-CUPONES.fxml")));
@@ -164,7 +211,7 @@ public class PosController {
 
     @FXML
     public void actionBuscarProductos(ActionEvent event) throws IOException {
-        owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Stage stage = new Stage();
         Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("8-BUSCAR.fxml"))));
@@ -178,15 +225,26 @@ public class PosController {
 
     @FXML
     public void actionEditarPedido(ActionEvent event) throws IOException {
-        owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("6-EDITARV.fxml"));
+        Parent root = loader.load();
+
+        EditController editController = loader.getController();
+        editController.setPedidoProductos(pedidoProductos);
 
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("6-EDITARV.fxml")));
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.setTitle("Inventario");
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(owner);
+
+        stage.setOnHidden(e -> {
+            tablePedido.refresh();
+            actualizarImportes();
+        });
+
         stage.show();
     }
 
@@ -211,8 +269,32 @@ public class PosController {
 
 
     @FXML
-    public void actionEliminarPedido(ActionEvent event) throws IOException {
-        actionCancelar(event);
+    public void actionEliminarProducto(ActionEvent event) throws IOException {
+        // Obtener el producto seleccionado
+        Product productoSeleccionado = tablePedido.getSelectionModel().getSelectedItem();
+
+        if (productoSeleccionado != null) {
+            // Eliminar el producto de la lista
+            pedidoProductos.remove(productoSeleccionado);
+
+            // Refrescar la tabla
+            tablePedido.refresh();
+            // Actualizar importes
+            actualizarImportes();
+            // Avisar al usuario
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("Producto eliminado");
+            alerta.setHeaderText(null);
+            alerta.setContentText("El producto \"" + productoSeleccionado.getNombre() + "\" ha sido eliminado del pedido.");
+            alerta.showAndWait();
+        } else {
+            // Mostrar alerta si no hay selección
+            Alert alerta = new Alert(Alert.AlertType.WARNING);
+            alerta.setTitle("Advertencia");
+            alerta.setHeaderText("No se ha seleccionado ningún producto");
+            alerta.setContentText("Por favor, seleccione un producto para eliminar.");
+            alerta.showAndWait();
+        }
     }
 
     @FXML
@@ -322,8 +404,45 @@ public class PosController {
     }
 
     private void agregarProductoAlPedido(Product producto) {
-        // Implementar lógica para añadir al pedido
-        // Esta es solo una implementación de ejemplo
-        System.out.println("Agregando al pedido: " + producto.getNombre() + " - $" + producto.getPrecio());
+        // Buscar producto en la lista de productos
+        for (Product p : pedidoProductos) {
+            if (p.getId().equals(producto.getId())){
+                p.addUnidad(1);
+                tablePedido.refresh();
+                actualizarImportes();
+                return;
+            }
+        }
+
+        // Por si no esta añadido
+        producto.setUnidad(1);
+        producto.setNotas("");
+        pedidoProductos.add(producto);
+        // Actualizar importes al inicializar
+        actualizarImportes();
+    }
+
+    private void actualizarImportes() {
+        listaImportes.clear();
+
+        // Calcular el total de los productos
+        double totalProductos = pedidoProductos.stream()
+                .mapToDouble(p -> p.getPrecio() * p.getUnidad())
+                .sum();
+
+        // Añadir el concepto de productos
+        listaImportes.add(new ConceptoImporte("Total Productos", totalProductos));
+
+        // Si el toggle está activado, añadir el costo adicional
+        if (toggleParaLlevar.isSelected()) {
+            double costoDesechable = totalProductos * PORCENTAJE_DESECHABLE;
+            listaImportes.add(new ConceptoImporte("Costo Desechable", costoDesechable));
+            totalProductos += costoDesechable;
+        }
+
+
+        // Actualizar el TextField con el total general
+        textTotal.setText(String.format("$%.2f", totalProductos));
     }
 }
+
