@@ -337,11 +337,15 @@ public class PosController {
 
     private void configurarVistaEnCuadricula() {
         gridProductos = new TilePane();
-        gridProductos.setPrefColumns(3); // Número de columnas
-        gridProductos.setHgap(15);
-        gridProductos.setVgap(15);
+        gridProductos.setPrefColumns(0); // Número de columnas
+        gridProductos.setHgap(10);
+        gridProductos.setVgap(10);
         gridProductos.setPadding(new Insets(10));
         gridProductos.setAlignment(Pos.CENTER);
+
+        // Mantener el ancho fijo para cada tamaño de celda
+        gridProductos.setPrefTileWidth(150);
+        gridProductos.setPrefTileHeight(180);
 
         scrollProductos.setContent(gridProductos);
         scrollProductos.setFitToWidth(true);
@@ -382,8 +386,11 @@ public class PosController {
         elementoProducto.setAlignment(Pos.CENTER);
         elementoProducto.setPadding(new Insets(10));
         elementoProducto.setStyle("-fx-background-color: #f4f4f4; -fx-border-radius: 5; -fx-background-radius: 5;");
-        elementoProducto.setPrefWidth(120);
-        elementoProducto.setPrefHeight(150);
+        // Establecer dimensiones fijas
+        elementoProducto.setPrefWidth(140);
+        elementoProducto.setPrefHeight(170);
+        elementoProducto.setMaxWidth(140);
+        elementoProducto.setMaxHeight(170);
 
         // Configurar la imagen
         ImageView imageView = new ImageView(producto.getImagen());
