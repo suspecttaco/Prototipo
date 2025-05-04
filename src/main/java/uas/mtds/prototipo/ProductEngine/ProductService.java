@@ -13,15 +13,15 @@ public class ProductService {
     public List<Product> obtenerProductosEjemplo() {
         List<Product> productos = new ArrayList<>();
 
-        productos.add(new Product("P001", "Café Americano", "/uas/mtds/prototipo/images/cafe_americano.png", 25.00, 100, "Bebidas"));
-        productos.add(new Product("P002", "Capuchino", "/uas/mtds/prototipo/images/capuchino.png", 35.00, 100, "Bebidas"));
-        productos.add(new Product("P003", "Muffin", "/uas/mtds/prototipo/images/muffin.png", 20.00, 50, "Postres"));
-        productos.add(new Product("P004", "Sandwich", "/uas/mtds/prototipo/images/sandwich.png", 45.00, 30, "Alimentos"));
-        productos.add(new Product("P005", "Té Verde", "/uas/mtds/prototipo/images/te_verde.png", 18.00, 80, "Bebidas"));
-        productos.add(new Product("P006", "Pastel", "/uas/mtds/prototipo/images/pastel.png", 30.00, 20, "Postres"));
-        productos.add(new Product("P007", "Galletas", "/uas/mtds/prototipo/images/galletas.png", 15.00, 60, "Postres"));
-        productos.add(new Product("P008", "Jugo", "/uas/mtds/prototipo/images/jugo.png", 22.00, 40, "Bebidas"));
-        productos.add(new Product("P009", "Refresco", "/uas/mtds/prototipo/images/refresco.png", 18.00, 100, "Bebidas"));
+        productos.add(new Product("P001", "Café Americano",  25.00,"/uas/mtds/prototipo/images/cafe_americano.png"));
+        productos.add(new Product("P002", "Capuchino",  35.00, "/uas/mtds/prototipo/images/capuchino.png"));
+        productos.add(new Product("P003", "Muffin",  20.00, "/uas/mtds/prototipo/images/muffin.png"));
+        productos.add(new Product("P004", "Sandwich",  45.00, "/uas/mtds/prototipo/images/sandwich.png"));
+        productos.add(new Product("P005", "Té Verde",  18.00,"/uas/mtds/prototipo/images/te_verde.png"));
+        productos.add(new Product("P006", "Pastel",  30.00, "/uas/mtds/prototipo/images/pastel.png"));
+        productos.add(new Product("P007", "Galletas",  15.00,"/uas/mtds/prototipo/images/galletas.png"));
+        productos.add(new Product("P008", "Jugo",  22.00,"/uas/mtds/prototipo/images/jugo.png"));
+        productos.add(new Product("P009", "Refresco",  18.00,"/uas/mtds/prototipo/images/refresco.png"));
 
         return productos;
     }
@@ -36,7 +36,7 @@ public class ProductService {
         String password = "contraseña";
 
         try (Connection conn = DriverManager.getConnection(url, usuario, password)) {
-            String sql = "SELECT id, nombre, imagen_ruta, precio, stock, categoria FROM productos";
+            String sql = "SELECT id, nombre, precio,imagen_rutaFROM productos";
 
             try (PreparedStatement stmt = conn.prepareStatement(sql);
                  ResultSet rs = stmt.executeQuery()) {
@@ -44,12 +44,10 @@ public class ProductService {
                 while (rs.next()) {
                     String id = rs.getString("id");
                     String nombre = rs.getString("nombre");
-                    String rutaImagen = rs.getString("imagen_ruta");
                     double precio = rs.getDouble("precio");
-                    int stock = rs.getInt("stock");
-                    String categoria = rs.getString("categoria");
+                    String rutaImagen = rs.getString("imagen_ruta");
 
-                    productos.add(new Product(id, nombre, rutaImagen, precio, stock, categoria));
+                    productos.add(new Product(id, nombre, precio, rutaImagen));
                 }
             }
         } catch (Exception e) {

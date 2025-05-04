@@ -14,9 +14,9 @@ import java.io.IOException;
 
 public class LogController {
     @FXML
-    private TextField textUser;
+    protected TextField textUser;
     @FXML
-    private PasswordField textPass;
+    protected PasswordField textPass;
 
     @FXML
     private void actionLogin (ActionEvent event) throws IOException {

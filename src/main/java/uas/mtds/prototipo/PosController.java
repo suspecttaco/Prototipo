@@ -12,10 +12,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
@@ -40,7 +37,8 @@ public class PosController {
     private Label labelHora;
     @FXML
     private Label labelFecha;
-
+    @FXML
+    private TableView tablePedido;
     @FXML
     private ScrollPane scrollProductos;
 
@@ -62,9 +60,6 @@ public class PosController {
 
         // Inicializar lista observable
         ProductService productoService = new ProductService();
-
-        // Opción 1: Cargar productos de ejemplo
-        // List<Producto> productos = productoService.obtenerProductosEjemplo();
 
         // Opción 2: Cargar productos desde la base de datos
         List<Product> productos = productoService.cargarProductosDesdeBaseDeDatos();
@@ -279,41 +274,6 @@ public class PosController {
     }
 
     /**
-     * Método para filtrar productos por categoría
-     * @param categoria Categoría a filtrar, o null para mostrar todos
-     */
-    public void filtrarProductosPorCategoria(String categoria) {
-        gridProductos.getChildren().clear();
-
-        for (Product producto : listaProductos) {
-            if (categoria == null || categoria.isEmpty() || producto.getCategoria().equals(categoria)) {
-                gridProductos.getChildren().add(crearElementoProducto(producto));
-            }
-        }
-    }
-
-    /**
-     * Método para buscar productos por nombre
-     * @param termino Término de búsqueda
-     */
-    public void buscarProductos(String termino) {
-        gridProductos.getChildren().clear();
-
-        if (termino == null || termino.isEmpty()) {
-            mostrarProductosEnGrid(); // Mostrar todos si no hay término
-            return;
-        }
-
-        String terminoLower = termino.toLowerCase();
-
-        for (Product producto : listaProductos) {
-            if (producto.getNombre().toLowerCase().contains(terminoLower)) {
-                gridProductos.getChildren().add(crearElementoProducto(producto));
-            }
-        }
-    }
-
-    /**
      * Método privado para actualizar la interfaz con los productos
      */
     private void mostrarProductosEnGrid() {
@@ -353,7 +313,7 @@ public class PosController {
         elementoProducto.getChildren().addAll(imageView, nombreText, precioText);
 
         // Manejar evento de clic
-        elementoProducto.setOnMouseClicked(event -> {
+        elementoProducto.setOnMouseClicked(_ -> {
             System.out.println("Producto seleccionado: " + producto.getNombre());
             agregarProductoAlPedido(producto);
         });

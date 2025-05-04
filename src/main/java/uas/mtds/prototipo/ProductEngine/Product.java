@@ -9,34 +9,22 @@ public class Product {
     private final String nombre;
     private Image imagen;
     private final double precio;
-    private int stock;
-    private final String categoria;
+    private int unidad = 1;
 
     // Constructor completo
-    public Product(String id, String nombre, String rutaImagen, double precio, int stock, String categoria) {
+    public Product(String id, String nombre, double precio, String rutaImagen) {
         this.id = id;
         this.nombre = nombre;
         try {
             InputStream stream = getClass().getResourceAsStream(rutaImagen);
-            if (stream != null) {
-                this.imagen = new Image(stream);
-            } else {
-                // Imagen por defecto si no se encuentra la ruta
-                this.imagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uas/mtds/prototipo/products/product_default.png")));
-            }
+            // Imagen por defecto si no se encuentra la ruta
+            this.imagen = new Image(Objects.requireNonNullElseGet(stream, () -> Objects.requireNonNull(getClass().getResourceAsStream("/uas/mtds/prototipo/products/product_default.png"))));
         } catch (Exception e) {
             System.err.println("Error al cargar la imagen: " + rutaImagen + " - " + e.getMessage());
             // Imagen por defecto en caso de error
             this.imagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uas/mtds/prototipo/products/product_default.png")));
         }
         this.precio = precio;
-        this.stock = stock;
-        this.categoria = categoria;
-    }
-
-    // Constructor simplificado
-    public Product(String id, String nombre, String rutaImagen, double precio) {
-        this(id, nombre, rutaImagen, precio, 0, "General");
     }
 
     // Getters y setters
@@ -56,20 +44,20 @@ public class Product {
         return precio;
     }
 
-    public int getStock() {
-        return stock;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-
     @Override
     public String toString() {
         return nombre;
+    }
+
+    public int getUnidad() {
+        return unidad;
+    }
+
+    public void setUnidad(int unidad) {
+        this.unidad = unidad;
+    }
+
+    public void addUnidad(int unidad) {
+        this.unidad += unidad;
     }
 }
