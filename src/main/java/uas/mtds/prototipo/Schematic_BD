@@ -19,7 +19,7 @@ CREATE TABLE producto (
 	nombre VARCHAR(20) NOT NULL,
     precio FLOAT(5,2) NOT NULL,
     descripcion VARCHAR(50) NOT NULL,
-    temperatura ENUM('H','C') NOT NUll, -- H -> HOT // C -> Cold
+    temperatura ENUM('H','C') NUll, -- H -> HOT // C -> Cold
     TamanoId INT NOT NULL,
     INDEX FK_tamanoId (TamanoId), FOREIGN KEY (TamanoId) REFERENCES tamano(TamanoId),
     SaborId INT NOT NULL,

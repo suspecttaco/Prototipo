@@ -13,14 +13,14 @@ public class Product {
     private final String temperatura;
     private String TamanoId;
     private String SaborId;
-    private Timestamp fechaMod;
+    private String fechaMod;
     private Image imagen;
 
     private int unidad;
     private String notas;
 
     // Constructor completo
-    public Product(String id, String nombre, double precio,String descripcion,String temperatura,String TamanoId, String SaborId, Timestamp fechaMod, String rutaImagen) {
+    public Product(String id, String nombre, double precio,String descripcion,String temperatura,String TamanoId, String SaborId, String fechaMod, String rutaImagen) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -54,7 +54,7 @@ public class Product {
     public String getTemperatura() {return temperatura;}
     public String getTamanoId() {return TamanoId;}
     public String getSaborId() {return SaborId;}
-    public Timestamp getFechaMod() {return fechaMod;}
+    public String getFechaMod() {return fechaMod;}
     public Image getImagen() {
         return imagen;
     }

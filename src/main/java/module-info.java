@@ -5,6 +5,7 @@ module uas.mtds.prototipo {
     requires atlantafx.base;
     requires java.sql;
     requires com.fasterxml.jackson.databind;
+    requires mysql.connector.j;
 
 
     opens uas.mtds.prototipo to javafx.fxml;
