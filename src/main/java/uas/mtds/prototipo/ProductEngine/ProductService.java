@@ -32,11 +32,11 @@ public class ProductService {
 
         // Definir la conexión
         String url = "jdbc:mysql://localhost:3306/cafeteria";
-        String usuario = "usuario";
-        String password = "contraseña";
+        String usuario = "root";
+        String password = "123456789";
 
         try (Connection conn = DriverManager.getConnection(url, usuario, password)) {
-            String sql = "SELECT id, nombre, precio,imagen_rutaFROM productos";
+            String sql = "SELECT id, nombre, precio,imagen_ruta FROM productos";
 
             try (PreparedStatement stmt = conn.prepareStatement(sql);
                  ResultSet rs = stmt.executeQuery()) {

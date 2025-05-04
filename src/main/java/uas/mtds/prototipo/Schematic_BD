@@ -1,0 +1,102 @@
+USE cafeteria;
+CREATE TABLE tamano(
+	TamanoId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    tam_chico FLOAT(4,2) NULL,
+    tam_mediano FLOAT(4,2) NULL,
+    tam_grande FLOAT(4,2) NULL,
+    tam_jumbo FLOAT(4,2) NULL,
+    fecha_mod DATETIME NOT NULL
+);
+CREATE TABLE sabor (
+	SaborId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(15) NOT NULL,
+    precio FLOAT(4,2) NOT NULL,
+    fecha_registro DATETIME NOT NULL,
+    fecha_mod DATETIME NOT NULL
+);
+CREATE TABLE producto (
+	ProductoId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	nombre VARCHAR(20) NOT NULL,
+    precio FLOAT(5,2) NOT NULL,
+    descripcion VARCHAR(50) NOT NULL,
+    temperatura ENUM('H','C') NOT NUll, -- H -> HOT // C -> Cold
+    TamanoId INT NOT NULL,
+    INDEX FK_tamanoId (TamanoId), FOREIGN KEY (TamanoId) REFERENCES tamano(TamanoId),
+    SaborId INT NOT NULL,
+    INDEX FK_saborId (SaborId), FOREIGN KEY (SaborId) REFERENCES sabor(SaborId),
+    fecha_mod DATETIME NOT NULL
+);
+CREATE TABLE inventario(
+	InventarioId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    ProductoId INT NOT NULL,
+    INDEX FK_ProductoId (ProductoId), FOREIGN KEY (ProductoId) REFERENCES producto(ProductoId),
+    nombre VARCHAR(25) NOT NULL,
+    cantidad INT NOT NULL,
+    estatus ENUM('A','D','E') NOT NULL, -- A -> Activo // D -> Desactivado // E -> Eliminado
+    fecha_registro DATETIME NOT NULL,
+    fecha_mod DATETIME NOT NULL
+);
+CREATE TABLE usuario(
+	UsuarioId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    contrasena CHAR(10) NOT NULL,
+    rol ENUM('EMP','GER','ADM') NOT NULL
+);
+CREATE TABLE cupon (
+	CuponId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nombre VARCHAR(25) NOT NULL,
+    porcentaje FLOAT (4,2) NOT NULL,
+    fecha_limite DATE NOT NULL,
+    fecha_aplicado DATETIME NOT NULL
+);
+CREATE TABLE cliente (
+	ClienteId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    ape1 VARCHAR(50) NOT NULL,
+    nombre VARCHAR(25) NOT NULL,
+    numero_telefonico CHAR(10) NOT NULL,
+    email VARCHAR(50) NULL,
+    fecha_registro DATETIME NOT NULL,
+    fecha_mod DATETIME NOT NULL
+);
+CREATE TABLE Venta(
+	VentaId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    importe FLOAT(6,2) NOT NULL,
+    llevar ENUM('Y','N') NOT NUll,
+    UsuarioId INT NOT NULL,
+    INDEX FK_UsuarioId (UsuarioId), FOREIGN KEY (UsuarioId) REFERENCES usuario(UsuarioId),
+    CuponId INT NULL,
+    INDEX FK_CuponId (CuponId), FOREIGN KEY (CuponId) REFERENCES cupon(CuponId),
+    ClienteId INT NULL,
+    INDEX FK_ClienteId (ClienteId), FOREIGN KEY (ClienteId) REFERENCES cliente(ClienteId),
+     fecha_mod DATETIME NOT NULL
+);
+CREATE TABLE DescripcionVenta (
+	DescripcionId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    VentaId INT NOT NULL,
+    INDEX Fk_VentaId (VentaId), FOREIGN KEY (VentaId) REFERENCES venta(VentaId),
+	ProductoId INT NOT NULL,
+    INDEX FK_ProductoId (ProductoId), FOREIGN KEY (ProductoId) REFERENCES producto(ProductoId)
+);
+CREATE TABLE InicioSesion (
+	InicioId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	UsuarioId INT NOT NULL,
+    INDEX FK_UsuarioId (UsuarioId), FOREIGN KEY (UsuarioId) REFERENCES usuario(UsuarioId),
+    fecha_inicio_sesion DATETIME NOT NULL
+);
+CREATE TABLE caja (
+	CajaId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    InicioId INT NOT NULL,
+    INDEX FK_InicioId (InicioId), FOREIGN KEY (InicioId) REFERENCES InicioSesion(InicioId),
+	UsuarioId INT NOT NULL,
+    INDEX FK_UsuarioId (UsuarioId), FOREIGN KEY (UsuarioId) REFERENCES usuario(UsuarioId),
+    nombre VARCHAR(30) NOT NULL,
+    fecha_inicio DATETIME NOT NULL,
+    fecha_cierre DATETIME NOT NULL
+);
+CREATE TABLE SoporteTecnico (
+	SoporteId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+	UsuarioId INT NOT NULL,
+    INDEX FK_UsuarioId (UsuarioId), FOREIGN KEY (UsuarioId) REFERENCES usuario(UsuarioId),
+    descripcion VARCHAR(50) NOT NULL,
+    fecha_reporte DATETIME NOT NULL,
+    fecha_mod DATETIME NOT NULL
+);
