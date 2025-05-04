@@ -2,20 +2,33 @@ package uas.mtds.prototipo.ProductEngine;
 
 import javafx.scene.image.Image;
 import java.io.InputStream;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Product {
     private final String id;
     private final String nombre;
-    private Image imagen;
     private final double precio;
+    private String descripcion;
+    private final String temperatura;
+    private String TamanoId;
+    private String SaborId;
+    private Timestamp fechaMod;
+    private Image imagen;
+
     private int unidad;
     private String notas;
 
     // Constructor completo
-    public Product(String id, String nombre, double precio, String rutaImagen) {
+    public Product(String id, String nombre, double precio,String descripcion,String temperatura,String TamanoId, String SaborId, Timestamp fechaMod, String rutaImagen) {
         this.id = id;
         this.nombre = nombre;
+        this.precio = precio;
+        this.descripcion = descripcion;
+        this.temperatura = temperatura;
+        this.TamanoId = TamanoId;
+        this.SaborId = SaborId;
+        this.fechaMod = fechaMod;
         try {
             InputStream stream = getClass().getResourceAsStream(rutaImagen);
             // Imagen por defecto si no se encuentra la ruta
@@ -25,24 +38,25 @@ public class Product {
             // Imagen por defecto en caso de error
             this.imagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uas/mtds/prototipo/products/product_default.png")));
         }
-        this.precio = precio;
     }
 
     // Getters y setters
     public String getId() {
         return id;
     }
-
     public String getNombre() {
         return nombre;
     }
-
-    public Image getImagen() {
-        return imagen;
-    }
-
     public double getPrecio() {
         return precio;
+    }
+    public String getDescripcion() {return descripcion;}
+    public String getTemperatura() {return temperatura;}
+    public String getTamanoId() {return TamanoId;}
+    public String getSaborId() {return SaborId;}
+    public Timestamp getFechaMod() {return fechaMod;}
+    public Image getImagen() {
+        return imagen;
     }
 
     @Override

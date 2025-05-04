@@ -1,9 +1,6 @@
 package uas.mtds.prototipo.ProductEngine;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +10,7 @@ public class ProductService {
     public List<Product> obtenerProductosEjemplo() {
         List<Product> productos = new ArrayList<>();
 
+        /*
         productos.add(new Product("P001", "Café Americano",  25.00,"/uas/mtds/prototipo/images/cafe_americano.png"));
         productos.add(new Product("P002", "Capuchino",  35.00, "/uas/mtds/prototipo/images/capuchino.png"));
         productos.add(new Product("P003", "Muffin",  20.00, "/uas/mtds/prototipo/images/muffin.png"));
@@ -22,7 +20,7 @@ public class ProductService {
         productos.add(new Product("P007", "Galletas",  15.00,"/uas/mtds/prototipo/images/galletas.png"));
         productos.add(new Product("P008", "Jugo",  22.00,"/uas/mtds/prototipo/images/jugo.png"));
         productos.add(new Product("P009", "Refresco",  18.00,"/uas/mtds/prototipo/images/refresco.png"));
-
+        */
         return productos;
     }
 
@@ -36,18 +34,26 @@ public class ProductService {
         String password = "123456789";
 
         try (Connection conn = DriverManager.getConnection(url, usuario, password)) {
-            String sql = "SELECT id, nombre, precio,imagen_ruta FROM productos";
+            String sql = "SELECT ProductoId, nombre, precio, descripcion, temperatura, TamanoId, SaborId, fecha_mod, imagen_ruta FROM producto";
 
             try (PreparedStatement stmt = conn.prepareStatement(sql);
                  ResultSet rs = stmt.executeQuery()) {
 
                 while (rs.next()) {
-                    String id = rs.getString("id");
+                    String id = rs.getString("ProductoId");
                     String nombre = rs.getString("nombre");
                     double precio = rs.getDouble("precio");
+                    String descripcion = rs.getString("descripcion") != null ? rs.getString("descripcion") : "";
+                    String temperatura = rs.getString("temperatura");
+                    String TamanoId = rs.getString("TamanoId");
+                    String SaborId = rs.getString("SaborId");
+                    Timestamp fechaMod = rs.getTimestamp("fecha_mod");
                     String rutaImagen = rs.getString("imagen_ruta");
 
-                    productos.add(new Product(id, nombre, precio, rutaImagen));
+                    //productos.add(new Product(id, nombre, precio,descripcion, rutaImagen));
+                    //productos.add(new Product());
+
+                    productos.add(new Product(id,nombre, precio,descripcion,temperatura,TamanoId,SaborId,fechaMod,rutaImagen));
                 }
             }
         } catch (Exception e) {

@@ -24,7 +24,8 @@ CREATE TABLE producto (
     INDEX FK_tamanoId (TamanoId), FOREIGN KEY (TamanoId) REFERENCES tamano(TamanoId),
     SaborId INT NOT NULL,
     INDEX FK_saborId (SaborId), FOREIGN KEY (SaborId) REFERENCES sabor(SaborId),
-    fecha_mod DATETIME NOT NULL
+    fecha_mod DATETIME NOT NULL,
+    imagen_ruta VARCHAR(255) NOT NULL
 );
 CREATE TABLE inventario(
 	InventarioId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
