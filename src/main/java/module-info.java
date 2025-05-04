@@ -3,6 +3,7 @@ module uas.mtds.prototipo {
     requires javafx.fxml;
     requires java.desktop;
     requires atlantafx.base;
+    requires java.sql;
 
 
     opens uas.mtds.prototipo to javafx.fxml;
