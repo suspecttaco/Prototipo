@@ -22,13 +22,12 @@ public class AuthController {
     @FXML
     private Button btn_Regresar;
 
-    private final String CREDENTIALS_FILE = "data/credentials.json";
     private final ObjectMapper mapper = new ObjectMapper();
     private PosController posController;
 
     public void initialize() {
-        btn_Autorizar.setOnAction(event -> verificarAutorizacion());
-        btn_Regresar.setOnAction(event -> cerrarVentana());
+        btn_Autorizar.setOnAction(_ -> verificarAutorizacion());
+        btn_Regresar.setOnAction(_ -> cerrarVentana());
 
         Platform.runLater(() -> {
             Stage stage = (Stage) btn_Regresar.getScene().getWindow();
@@ -69,13 +68,15 @@ public class AuthController {
 
     private boolean verificarCredenciales(String username, String password) {
         try {
+            String CREDENTIALS_FILE = "data/credentials.json";
             File file = new File(CREDENTIALS_FILE);
             if (!file.exists()) {
                 return false;
             }
 
             List<Credentials> credentials = mapper.readValue(file,
-                new TypeReference<List<Credentials>>(){});
+                    new TypeReference<>() {
+                    });
 
             return credentials.stream()
                 .anyMatch(c -> c.getUsername().equals(username)

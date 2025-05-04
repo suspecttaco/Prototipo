@@ -23,6 +23,7 @@ public class LogController {
     @FXML
     protected PasswordField textPass;
 
+
     private final ObjectMapper mapper = new ObjectMapper();
 
     private boolean verificarCredenciales(String username, String password) {
@@ -37,7 +38,8 @@ public class LogController {
             }
 
             List<Credentials> credentials = mapper.readValue(file,
-                    new TypeReference<List<Credentials>>(){});
+                    new TypeReference<>() {
+                    });
 
             return credentials.stream()
                     .anyMatch(c -> c.getUsername().equals(username)

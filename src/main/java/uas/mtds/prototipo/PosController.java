@@ -67,8 +67,6 @@ public class PosController {
     private TextField textTotal;
 
     private final ObservableList<ConceptoImporte> listaImportes = FXCollections.observableArrayList();
-    private static final double PORCENTAJE_DESECHABLE = 0.10; // 10% adicional
-
 
     private final ObservableList<Product> pedidoProductos = FXCollections.observableArrayList();
 
@@ -436,6 +434,7 @@ public class PosController {
 
     private void actualizarImportes() {
         listaImportes.clear();
+        double PORCENTAJE_DESECHABLE = 0.10;
 
         // Calcular el total de los productos
         double totalProductos = pedidoProductos.stream()
@@ -476,6 +475,7 @@ public class PosController {
             toggleParaLlevar.setSelected(false);
         }
     }
+
 }
 
 record ConceptoImporte(String concepto, double importe) {

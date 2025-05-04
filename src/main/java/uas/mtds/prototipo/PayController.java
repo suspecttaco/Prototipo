@@ -4,12 +4,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import uas.mtds.prototipo.ProductEngine.Product;
 
 import javafx.stage.Stage;
-import javafx.stage.Window;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
