@@ -19,10 +19,7 @@ public class EditController {
     @FXML
     private Button buttonGuardar;
 
-    private List<Product> pedidoProductos;
-
     public void setPedidoProductos(List<Product> pedidoProductos) {
-        this.pedidoProductos = pedidoProductos;
 
         // Configurar ComboBox con los productos
         comboBoxProductos.setItems(FXCollections.observableArrayList(pedidoProductos));
@@ -39,7 +36,7 @@ public class EditController {
         });
 
         // Listener para actualizar los controles al cambiar el producto
-        comboBoxProductos.getSelectionModel().selectedItemProperty().addListener((obs, oldProduct, newProduct) -> {
+        comboBoxProductos.getSelectionModel().selectedItemProperty().addListener((_, _, newProduct) -> {
             if (newProduct != null) {
                 spinnerCantidad.getValueFactory().setValue(newProduct.getUnidad());
                 textAreaNotas.setText(newProduct.getNotas());
@@ -59,7 +56,7 @@ public class EditController {
         spinnerCantidad.setValueFactory(valueFactory);
 
         // Configurar acción del botón Guardar
-        buttonGuardar.setOnAction(event -> guardarCambios());
+        buttonGuardar.setOnAction(_ -> guardarCambios());
     }
 
     private void guardarCambios() {

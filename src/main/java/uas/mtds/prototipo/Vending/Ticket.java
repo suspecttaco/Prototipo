@@ -1,6 +1,5 @@
 package uas.mtds.prototipo.Vending;
 
-import uas.mtds.prototipo.LogController;
 import uas.mtds.prototipo.ProductEngine.Product;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ public class Ticket {
     private final Date fecha;
     private int CuponesId;
     private final int ClienteId;
-    private final List<Product> carrito = new ArrayList<Product>();
+    private final List<Product> carrito = new ArrayList<>();
 
     public Ticket(int UsuarioId, boolean pLlevar, Date fecha, int ClienteId) {
         this.UsuarioId = UsuarioId;

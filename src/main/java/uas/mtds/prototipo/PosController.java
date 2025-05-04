@@ -23,7 +23,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import uas.mtds.prototipo.Auxiliar.ConceptoImporte;
 import uas.mtds.prototipo.ProductEngine.Product;
 import uas.mtds.prototipo.ProductEngine.ProductService;
 
@@ -67,13 +66,14 @@ public class PosController {
     @FXML
     private TextField textTotal;
 
-    private ObservableList<ConceptoImporte> listaImportes = FXCollections.observableArrayList();
+    private final ObservableList<ConceptoImporte> listaImportes = FXCollections.observableArrayList();
     private static final double PORCENTAJE_DESECHABLE = 0.10; // 10% adicional
 
 
-    private ObservableList<Product> pedidoProductos = FXCollections.observableArrayList();
+    private final ObservableList<Product>  pedidoProductos = FXCollections.observableArrayList();
 
     public void initialize() {
+
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -108,14 +108,14 @@ public class PosController {
 
         //PARTE 3 - TABLA DE MONTOS TOTALES
         // Configurar columnas de la tabla
-        columnConcepto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getConcepto()));
-        columnMonto.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("$%.2f", cellData.getValue().getImporte())));
+        columnConcepto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().concepto()));
+        columnMonto.setCellValueFactory(cellData -> new SimpleStringProperty(String.format("$%.2f", cellData.getValue().importe())));
 
         // Enlazar el modelo de datos con la tabla
         tableImporte.setItems(listaImportes);
 
         // Listener para el toggle
-        toggleParaLlevar.selectedProperty().addListener((obs, oldValue, newValue) -> actualizarImportes());
+        toggleParaLlevar.selectedProperty().addListener((_, _, _) -> actualizarImportes());
 
 
     }
@@ -157,8 +157,14 @@ public class PosController {
     public void actionCobrar(ActionEvent event) throws IOException {
         Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("2-PAGO.fxml"));
+        Parent root = loader.load();
+
+        PayController payController = loader.getController();
+        payController.setPosController(this);
+        payController.cargarResumen(pedidoProductos, listaImportes); // Pasar productos e importes
+
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("2-PAGO.fxml")));
         stage.setScene(new Scene(root));
         stage.setTitle("PAGO");
         stage.setResizable(false);
@@ -240,7 +246,7 @@ public class PosController {
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.initOwner(owner);
 
-        stage.setOnHidden(e -> {
+        stage.setOnHidden(_ -> {
             tablePedido.refresh();
             actualizarImportes();
         });
@@ -269,7 +275,7 @@ public class PosController {
 
 
     @FXML
-    public void actionEliminarProducto(ActionEvent event) throws IOException {
+    public void actionEliminarProducto() {
         // Obtener el producto seleccionado
         Product productoSeleccionado = tablePedido.getSelectionModel().getSelectedItem();
 
@@ -444,5 +450,27 @@ public class PosController {
         // Actualizar el TextField con el total general
         textTotal.setText(String.format("$%.2f", totalProductos));
     }
+
+    public void limpiarPedido() {
+        // Limpiar la lista de productos
+        pedidoProductos.clear();
+
+        // Limpiar la lista de importes
+        listaImportes.clear();
+
+        // Refrescar las tablas
+        tablePedido.refresh();
+        tableImporte.refresh();
+
+        // Reiniciar el total
+        textTotal.setText("$0.00");
+
+        // Desactivar el toggle de para llevar si está activo
+        if (toggleParaLlevar.isSelected()) {
+            toggleParaLlevar.setSelected(false);
+        }
+    }
 }
 
+record ConceptoImporte(String concepto, double importe) {
+}
