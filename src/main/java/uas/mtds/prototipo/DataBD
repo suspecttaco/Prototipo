@@ -4,6 +4,7 @@ INSERT INTO tamano (tam_chico, tam_mediano, tam_grande, tam_jumbo, fecha_mod) VA
 (0.00, 5.00, 10.00, 15.00, NOW());
 
 INSERT INTO sabor (nombre, precio, fecha_registro, fecha_mod) VALUES
+('Regular', 0.0, NOW(), NOW()),
 ('Vainilla', 5.00, NOW(), NOW()),
 ('Chocolate', 5.50, NOW(), NOW()),
 ('Caramelo', 6.00, NOW(), NOW()),
