@@ -9,26 +9,26 @@ public class Product {
     private final String id;
     private final String nombre;
     private final double precio;
-    private String descripcion;
+    //private String descripcion;
     private final String temperatura;
-    private String TamanoId;
-    private String SaborId;
-    private String fechaMod;
+    //private String TamanoId;
+   // private String SaborId;
+    //private String fechaMod;
     private Image imagen;
 
     private int unidad;
     private String notas;
 
     // Constructor completo
-    public Product(String id, String nombre, double precio,String descripcion,String temperatura,String TamanoId, String SaborId, String fechaMod, String rutaImagen) {
+    public Product(String id, String nombre, double precio,String temperatura, String rutaImagen) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
-        this.descripcion = descripcion;
+        //this.descripcion = descripcion;
         this.temperatura = temperatura;
-        this.TamanoId = TamanoId;
-        this.SaborId = SaborId;
-        this.fechaMod = fechaMod;
+        //this.TamanoId = TamanoId;
+        //this.SaborId = SaborId;
+        //this.fechaMod = fechaMod;
         try {
             InputStream stream = getClass().getResourceAsStream(rutaImagen);
             // Imagen por defecto si no se encuentra la ruta
@@ -38,6 +38,7 @@ public class Product {
             // Imagen por defecto en caso de error
             this.imagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uas/mtds/prototipo/products/product_default.png")));
         }
+        //this.imagen = new Image(rutaImagen);
     }
 
     // Getters y setters
@@ -50,11 +51,11 @@ public class Product {
     public double getPrecio() {
         return precio;
     }
-    public String getDescripcion() {return descripcion;}
+    //public String getDescripcion() {return descripcion;}
     public String getTemperatura() {return temperatura;}
-    public String getTamanoId() {return TamanoId;}
-    public String getSaborId() {return SaborId;}
-    public String getFechaMod() {return fechaMod;}
+    //public String getTamanoId() {return TamanoId;}
+    //public String getSaborId() {return SaborId;}
+    //public String getFechaMod() {return fechaMod;}
     public Image getImagen() {
         return imagen;
     }

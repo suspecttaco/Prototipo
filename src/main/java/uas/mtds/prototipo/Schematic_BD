@@ -1,3 +1,4 @@
+CREATE DATABASE cafeteria;
 USE cafeteria;
 CREATE TABLE tamano(
 	TamanoId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -5,26 +6,22 @@ CREATE TABLE tamano(
     tam_mediano FLOAT(4,2) NULL,
     tam_grande FLOAT(4,2) NULL,
     tam_jumbo FLOAT(4,2) NULL,
-    fecha_mod DATETIME NOT NULL
+    fecha_mod DATETIME NULL
 );
 CREATE TABLE sabor (
 	SaborId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     nombre VARCHAR(15) NOT NULL,
     precio FLOAT(4,2) NOT NULL,
     fecha_registro DATETIME NOT NULL,
-    fecha_mod DATETIME NOT NULL
+    fecha_mod DATETIME NULL
 );
 CREATE TABLE producto (
 	ProductoId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 	nombre VARCHAR(20) NOT NULL,
     precio FLOAT(5,2) NOT NULL,
-    descripcion VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(50) NULL,
     temperatura ENUM('H','C') NUll, -- H -> HOT // C -> Cold
-    TamanoId INT NOT NULL,
-    INDEX FK_tamanoId (TamanoId), FOREIGN KEY (TamanoId) REFERENCES tamano(TamanoId),
-    SaborId INT NOT NULL,
-    INDEX FK_saborId (SaborId), FOREIGN KEY (SaborId) REFERENCES sabor(SaborId),
-    fecha_mod DATETIME NOT NULL,
+    fecha_mod DATETIME NULL,
     imagen_ruta VARCHAR(255) NOT NULL
 );
 CREATE TABLE inventario(
@@ -37,6 +34,9 @@ CREATE TABLE inventario(
     fecha_registro DATETIME NOT NULL,
     fecha_mod DATETIME NOT NULL
 );
+
+
+
 CREATE TABLE usuario(
 	UsuarioId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     contrasena CHAR(10) NOT NULL,
@@ -57,25 +57,6 @@ CREATE TABLE cliente (
     email VARCHAR(50) NULL,
     fecha_registro DATETIME NOT NULL,
     fecha_mod DATETIME NOT NULL
-);
-CREATE TABLE Venta(
-	VentaId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    importe FLOAT(6,2) NOT NULL,
-    llevar ENUM('Y','N') NOT NUll,
-    UsuarioId INT NOT NULL,
-    INDEX FK_UsuarioId (UsuarioId), FOREIGN KEY (UsuarioId) REFERENCES usuario(UsuarioId),
-    CuponId INT NULL,
-    INDEX FK_CuponId (CuponId), FOREIGN KEY (CuponId) REFERENCES cupon(CuponId),
-    ClienteId INT NULL,
-    INDEX FK_ClienteId (ClienteId), FOREIGN KEY (ClienteId) REFERENCES cliente(ClienteId),
-     fecha_mod DATETIME NOT NULL
-);
-CREATE TABLE DescripcionVenta (
-	DescripcionId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    VentaId INT NOT NULL,
-    INDEX Fk_VentaId (VentaId), FOREIGN KEY (VentaId) REFERENCES venta(VentaId),
-	ProductoId INT NOT NULL,
-    INDEX FK_ProductoId (ProductoId), FOREIGN KEY (ProductoId) REFERENCES producto(ProductoId)
 );
 CREATE TABLE InicioSesion (
 	InicioId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -100,4 +81,31 @@ CREATE TABLE SoporteTecnico (
     descripcion VARCHAR(50) NOT NULL,
     fecha_reporte DATETIME NOT NULL,
     fecha_mod DATETIME NOT NULL
+);
+CREATE TABLE ticket (
+	TicketId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    ClienteId INT NOT NULL,
+    INDEX FK_ClienteId (ClienteId), FOREIGN KEY (ClienteId) REFERENCES cliente(ClienteId),
+    importe FLOAT(6,2) NOT NULL,
+    CajaId INT NOT NULL,
+    INDEX FK_CajaId (CajaId), FOREIGN KEY (CajaId) REFERENCES caja(CajaId),
+    fecha_venta DATETIME NOT NULL,
+    fecha_mod DATETIME NULL
+);
+CREATE TABLE Venta(
+	VentaId INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    llevar ENUM('Y','N') NOT NUll,
+    UsuarioId INT NOT NULL,
+    INDEX FK_UsuarioId (UsuarioId), FOREIGN KEY (UsuarioId) REFERENCES usuario(UsuarioId),
+    CuponId INT NULL,
+    INDEX FK_CuponId (CuponId), FOREIGN KEY (CuponId) REFERENCES cupon(CuponId),
+    TicketId INT NOT NULL,
+    INDEX FK_TicketId (TicketId), FOREIGN KEY (TicketId) REFERENCES Ticket(TicketId),
+    TamanoId INT NOT NULL,
+    INDEX FK_tamanoId (TamanoId), FOREIGN KEY (TamanoId) REFERENCES tamano(TamanoId),
+    SaborId INT NOT NULL,
+    INDEX FK_saborId (SaborId), FOREIGN KEY (SaborId) REFERENCES sabor(SaborId),
+	ProductoId INT NOT NULL,
+    INDEX FK_ProductoId (ProductoId), FOREIGN KEY (ProductoId) REFERENCES producto(ProductoId),
+     fecha_mod DATETIME NOT NULL
 );
