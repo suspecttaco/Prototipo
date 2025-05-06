@@ -17,8 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="CENTER" prefHeight="700.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uas.mtds.prototipo.ModController">
+<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uas.mtds.prototipo.ModController">
    <children>
       <Label text="Modificar Producto.">
          <font>
@@ -26,23 +25,23 @@
          </font>
       </Label>
       <Separator prefWidth="200.0" />
-      <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imgProd" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" />
       <VBox alignment="TOP_CENTER" spacing="5.0">
          <children>
-            <Label text="--- Nombre de producto ---">
+            <Label fx:id="labelNom" text="--- Nombre de producto ---">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
             </Label>
-            <Label text="-- Descripcion --" />
+            <Label fx:id="labelDesc" text="-- Descripcion --" />
          </children>
       </VBox>
       <Separator prefWidth="200.0" />
       <Accordion prefHeight="300.0">
         <panes>
-          <TitledPane animated="false" text="Tamaño" expanded="true">
+          <TitledPane fx:id="tabSize" animated="false" text="Tamaño">
                <content>
-                  <GridPane vgap="5.0">
+                  <GridPane>
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -53,24 +52,21 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <RadioButton mnemonicParsing="false" selected="true" text="Regular (Chico)">
+                        <RadioButton fx:id="radReg" mnemonicParsing="false" selected="true" text="Regular (Chico)">
                            <toggleGroup>
                               <ToggleGroup fx:id="radSize" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="Mediano" toggleGroup="$radSize" GridPane.rowIndex="1" />
-                        <RadioButton mnemonicParsing="false" text="Grande" toggleGroup="$radSize" GridPane.rowIndex="2" />
-                        <RadioButton mnemonicParsing="false" text="Jumbo" toggleGroup="$radSize" GridPane.rowIndex="3" />
+                        <RadioButton fx:id="radMed" mnemonicParsing="false" text="Mediano" toggleGroup="$radSize" GridPane.rowIndex="1" />
+                        <RadioButton fx:id="radBig" mnemonicParsing="false" text="Grande" toggleGroup="$radSize" GridPane.rowIndex="2" />
+                        <RadioButton fx:id="radJum" mnemonicParsing="false" text="Jumbo" toggleGroup="$radSize" GridPane.rowIndex="3" />
                      </children>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
                   </GridPane>
                </content>
           </TitledPane>
-          <TitledPane animated="false" text="Sabor">
+          <TitledPane fx:id="tabFlav" animated="false" text="Sabor">
                <content>
-                  <GridPane vgap="5.0">
+                  <GridPane>
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -83,23 +79,20 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <RadioButton mnemonicParsing="false" selected="true" text="Regular">
+                        <RadioButton fx:id="radFlavReg" mnemonicParsing="false" selected="true" text="Regular">
                            <toggleGroup>
                               <ToggleGroup fx:id="radFlav" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton layoutX="20.0" layoutY="26.0" mnemonicParsing="false" text="Chocolate" toggleGroup="$radFlav" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <RadioButton mnemonicParsing="false" text="Vainilla" toggleGroup="$radFlav" GridPane.rowIndex="1" />
-                        <RadioButton mnemonicParsing="false" text="Avellana" toggleGroup="$radFlav" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <RadioButton layoutX="190.0" layoutY="56.0" mnemonicParsing="false" text="Fresa" toggleGroup="$radFlav" GridPane.rowIndex="3" />
-                        <RadioButton layoutX="20.0" layoutY="86.0" mnemonicParsing="false" text="Coco" toggleGroup="$radFlav" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <RadioButton mnemonicParsing="false" text="Caramelo" toggleGroup="$radFlav" GridPane.rowIndex="2" />
-                        <RadioButton mnemonicParsing="false" text="Almendra" toggleGroup="$radFlav" GridPane.rowIndex="4" />
-                        <RadioButton mnemonicParsing="false" text="Canela" toggleGroup="$radFlav" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <RadioButton fx:id="radFlavCho" layoutX="20.0" layoutY="26.0" mnemonicParsing="false" text="Chocolate" toggleGroup="$radFlav" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <RadioButton fx:id="radFlavVai" mnemonicParsing="false" text="Vainilla" toggleGroup="$radFlav" GridPane.rowIndex="1" />
+                        <RadioButton fx:id="radFlavAve" mnemonicParsing="false" text="Avellana" toggleGroup="$radFlav" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <RadioButton fx:id="radFlavFre" layoutX="190.0" layoutY="56.0" mnemonicParsing="false" text="Fresa" toggleGroup="$radFlav" GridPane.rowIndex="3" />
+                        <RadioButton fx:id="radFlavCoc" layoutX="20.0" layoutY="86.0" mnemonicParsing="false" text="Coco" toggleGroup="$radFlav" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <RadioButton fx:id="radFlavCar" mnemonicParsing="false" text="Caramelo" toggleGroup="$radFlav" GridPane.rowIndex="2" />
+                        <RadioButton fx:id="radFlavAlm" mnemonicParsing="false" text="Almendra" toggleGroup="$radFlav" GridPane.rowIndex="4" />
+                        <RadioButton fx:id="radFlavCan" mnemonicParsing="false" text="Canela" toggleGroup="$radFlav" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
                   </GridPane>
                </content>
           </TitledPane>
@@ -115,19 +108,16 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Spinner editable="true" prefWidth="100.0" styleClass="split-arrows-horizontal" />
+                  <Spinner fx:id="spinQty" editable="true" styleClass="split-arrows-horizontal" />
                </children>
             </HBox>
             <Separator orientation="VERTICAL" />
-            <Button mnemonicParsing="false" text="Guardar" HBox.hgrow="ALWAYS">
+            <Button fx:id="btnSave" mnemonicParsing="false" text="Guardar" HBox.hgrow="ALWAYS">
                <font>
-                  <Font size="16.0" />
+                  <Font size="18.0" />
                </font>
             </Button>
          </children>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
       </HBox>
    </children>
    <padding>
