@@ -2,14 +2,13 @@ package uas.mtds.prototipo.ProductEngine;
 
 import javafx.scene.image.Image;
 import java.io.InputStream;
-import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Product {
     private final String id;
     private final String nombre;
     private final double precio;
-    //private String descripcion;
+    private String descripcion;
     private final String temperatura;
     //private String TamanoId;
    // private String SaborId;
@@ -45,17 +44,19 @@ public class Product {
     public String getId() {
         return id;
     }
+
     public String getNombre() {
         return nombre;
     }
+
     public double getPrecio() {
         return precio;
     }
-    //public String getDescripcion() {return descripcion;}
+
+    public String getDescripcion() {return descripcion;}
+
     public String getTemperatura() {return temperatura;}
-    //public String getTamanoId() {return TamanoId;}
-    //public String getSaborId() {return SaborId;}
-    //public String getFechaMod() {return fechaMod;}
+
     public Image getImagen() {
         return imagen;
     }

@@ -413,8 +413,52 @@ public class PosController {
 
         // Manejar evento de clic
         elementoProducto.setOnMouseClicked(_ -> {
-            System.out.println("Producto seleccionado: " + producto.getNombre());
-            agregarProductoAlPedido(producto);
+
+            try {
+                // Asegurarse de que la ruta sea correcta
+                String fxmlPath = "/uas/mtds/prototipo/10-EDITARP.fxml";
+                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+
+                if (loader.getLocation() == null) {
+                    throw new IOException("No se pudo encontrar el archivo FXML en: " + fxmlPath);
+                }
+
+                Parent root = loader.load();
+                ModController modController = loader.getController();
+
+                if (modController == null) {
+                    throw new IOException("No se pudo cargar el controlador");
+                }
+
+                modController.setProduct(producto);
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setResizable(false);
+                stage.setTitle("Modificar producto");
+                stage.initModality(Modality.APPLICATION_MODAL);
+                stage.initOwner(scrollProductos.getScene().getWindow());
+
+                stage.setOnHidden(event -> {
+                    Product productoModificado = modController.getProduct();
+                    if (productoModificado != null) {
+                        agregarProductoAlPedido(productoModificado);
+                    }
+                });
+
+                stage.showAndWait();
+
+            } catch (IOException e) {
+                System.err.println("Error al cargar FXML: " + e.getMessage());
+                e.printStackTrace(); // Esto nos ayudará a ver el error completo
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Error al abrir la ventana");
+                alert.setContentText("Detalles: " + e.getMessage());
+                alert.showAndWait();
+            }
+
         });
 
         return elementoProducto;
