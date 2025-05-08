@@ -9,25 +9,18 @@ public class Product {
     private final String nombre;
     private final double precio;
     private String descripcion;
-    private final String temperatura;
-    //private String TamanoId;
-   // private String SaborId;
-    //private String fechaMod;
+
     private Image imagen;
 
     private int unidad;
     private String notas;
 
-    // Constructor completo
-    public Product(String id, String nombre, double precio,String temperatura, String rutaImagen) {
+    public Product(String id, String nombre, double precio, String rutaImagen, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
-        //this.descripcion = descripcion;
-        this.temperatura = temperatura;
-        //this.TamanoId = TamanoId;
-        //this.SaborId = SaborId;
-        //this.fechaMod = fechaMod;
+        this.descripcion = descripcion;
+
         try {
             InputStream stream = getClass().getResourceAsStream(rutaImagen);
             // Imagen por defecto si no se encuentra la ruta
@@ -54,8 +47,6 @@ public class Product {
     }
 
     public String getDescripcion() {return descripcion;}
-
-    public String getTemperatura() {return temperatura;}
 
     public Image getImagen() {
         return imagen;

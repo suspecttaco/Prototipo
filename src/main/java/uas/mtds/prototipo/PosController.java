@@ -380,89 +380,86 @@ public class PosController {
         }
     }
 
-    private VBox crearElementoProducto(Product producto) {
-        // Crear VBox para contener la imagen y el nombre
-        VBox elementoProducto = new VBox(5);
-        elementoProducto.setAlignment(Pos.CENTER);
-        elementoProducto.setPadding(new Insets(10));
-        elementoProducto.setStyle("-fx-background-color: #f4f4f4; -fx-border-radius: 5; -fx-background-radius: 5;");
-        // Establecer dimensiones fijas
-        elementoProducto.setPrefWidth(140);
-        elementoProducto.setPrefHeight(170);
-        elementoProducto.setMaxWidth(140);
-        elementoProducto.setMaxHeight(170);
+private VBox crearElementoProducto(Product producto) {
+    // Contenedor principal
+    VBox elementoProducto = new VBox(5);
+    elementoProducto.setAlignment(Pos.CENTER);
+    elementoProducto.setPadding(new Insets(10));
+    elementoProducto.setStyle("-fx-background-color: #f4f4f4; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;");
+    elementoProducto.setPrefWidth(140);
+    elementoProducto.setPrefHeight(170);
+    elementoProducto.setMaxWidth(140);
+    elementoProducto.setMaxHeight(170);
 
-        // Configurar la imagen
-        ImageView imageView = new ImageView(producto.getImagen());
-        imageView.setFitHeight(80);
-        imageView.setFitWidth(80);
-        imageView.setPreserveRatio(true);
+    // Imagen del producto
+    ImageView imageView = new ImageView(producto.getImagen());
+    imageView.setFitHeight(80);
+    imageView.setFitWidth(80);
+    imageView.setPreserveRatio(true);
 
-        // Configurar el texto
-        Text nombreText = new Text(producto.getNombre());
-        nombreText.setFont(Font.font("Roboto", 14));
-        nombreText.setWrappingWidth(100);
-        nombreText.setTextAlignment(TextAlignment.CENTER);
+    // Nombre del producto
+    Text nombreText = new Text(producto.getNombre());
+    nombreText.setFont(Font.font("Roboto", 14));
+    nombreText.setWrappingWidth(100);
+    nombreText.setTextAlignment(TextAlignment.CENTER);
 
-        // Añadir precio
-        Text precioText = new Text(String.format("$%.2f", producto.getPrecio()));
-        precioText.setFont(Font.font("Roboto", 12));
+    // Precio del producto
+    Text precioText = new Text(String.format("$%.2f", producto.getPrecio()));
+    precioText.setFont(Font.font("Roboto", 12));
 
-        // Añadir elementos al VBox
-        elementoProducto.getChildren().addAll(imageView, nombreText, precioText);
+    // Agregar elementos al contenedor
+    elementoProducto.getChildren().addAll(imageView, nombreText, precioText);
 
-        // Manejar evento de clic
-        elementoProducto.setOnMouseClicked(_ -> {
+    // Manejador de clic
+    elementoProducto.setOnMouseClicked(event -> {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("10-EDITARP.fxml"));
+            Parent root = loader.load();
 
-            try {
-                // Asegurarse de que la ruta sea correcta
-                String fxmlPath = "/uas/mtds/prototipo/10-EDITARP.fxml";
-                FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            ModController modController = loader.getController();
+            modController.setProduct(producto); // Usar clone para evitar modificar el original directamente
 
-                if (loader.getLocation() == null) {
-                    throw new IOException("No se pudo encontrar el archivo FXML en: " + fxmlPath);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Modificar " + producto.getNombre());
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.initOwner(elementoProducto.getScene().getWindow());
+
+            // Manejar el resultado de la edición
+            stage.setOnHiding(windowEvent -> {
+                Product productoModificado = modController.getProduct();
+                if (productoModificado != null) {
+                    agregarProductoAlPedido(productoModificado);
                 }
+            });
 
-                Parent root = loader.load();
-                ModController modController = loader.getController();
+            stage.show();
 
-                if (modController == null) {
-                    throw new IOException("No se pudo cargar el controlador");
-                }
+        } catch (IOException e) {
+            mostrarError("Error al abrir ventana de edición", e.getMessage());
+        }
+    });
 
-                modController.setProduct(producto);
+    // Efecto hover
+    elementoProducto.setOnMouseEntered(e ->
+        elementoProducto.setStyle("-fx-background-color: #e0e0e0; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;")
+    );
 
-                Stage stage = new Stage();
-                stage.setScene(new Scene(root));
-                stage.setResizable(false);
-                stage.setTitle("Modificar producto");
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.initOwner(scrollProductos.getScene().getWindow());
+    elementoProducto.setOnMouseExited(e ->
+        elementoProducto.setStyle("-fx-background-color: #f4f4f4; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;")
+    );
 
-                stage.setOnHidden(event -> {
-                    Product productoModificado = modController.getProduct();
-                    if (productoModificado != null) {
-                        agregarProductoAlPedido(productoModificado);
-                    }
-                });
+    return elementoProducto;
+}
 
-                stage.showAndWait();
-
-            } catch (IOException e) {
-                System.err.println("Error al cargar FXML: " + e.getMessage());
-                e.printStackTrace(); // Esto nos ayudará a ver el error completo
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Error al abrir la ventana");
-                alert.setContentText("Detalles: " + e.getMessage());
-                alert.showAndWait();
-            }
-
-        });
-
-        return elementoProducto;
-    }
+private void mostrarError(String titulo, String mensaje) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle(titulo);
+    alert.setHeaderText(null);
+    alert.setContentText(mensaje);
+    alert.showAndWait();
+}
 
     private void agregarProductoAlPedido(Product producto) {
         // Buscar producto en la lista de productos

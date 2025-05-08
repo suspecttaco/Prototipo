@@ -2,9 +2,8 @@ package uas.mtds.prototipo;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import uas.mtds.prototipo.ProductEngine.Product;
-
-import javax.swing.text.html.ImageView;
 
 public class ModController {
     @FXML
@@ -30,11 +29,11 @@ public class ModController {
 
     @FXML
     public void initialize() {
-        labelNom.setText(productoSeleccionado.getNombre());
-        labelDesc.setText(productoSeleccionado.getDescripcion());
 
         // Asegurarse de que el panel se expanda después de que la UI esté lista
         javafx.application.Platform.runLater(() -> {
+            labelNom.setText(productoSeleccionado.getNombre());
+            labelDesc.setText(productoSeleccionado.getDescripcion());
             tabSize.setExpanded(true);
         });
     }
