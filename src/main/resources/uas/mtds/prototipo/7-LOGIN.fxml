@@ -1,25 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uas.mtds.prototipo.LogController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uas.mtds.prototipo.LogController">
    <children>
       <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
          <children>
-            <VBox fx:id="vbox" alignment="CENTER" prefHeight="400.0" prefWidth="229.0" style="-fx-background-color: #5c3d2e;">
+            <VBox fx:id="vbox" alignment="BOTTOM_CENTER" prefWidth="229.0" style="-fx-background-color: linear-gradient(to bottom, #5c3d2e, #8b5e45);">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
@@ -29,7 +20,7 @@
                         <Image url="@images/granos-de-cafe.png" />
                      </image>
                   </ImageView>
-                  <Label text="Punto de Venta">
+                  <Label text="Punto de Venta" textFill="#fcfcfc">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -39,9 +30,9 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </VBox>
-            <VBox prefHeight="400.0" prefWidth="419.0">
+            <VBox alignment="CENTER" prefHeight="400.0" prefWidth="419.0" style="-fx-background-color: linear-gradient(to bottom, #e6d5cc, #d4b5a6);" HBox.hgrow="ALWAYS">
                <children>
-                  <GridPane prefHeight="363.0" prefWidth="370.0">
+                  <GridPane prefHeight="363.0" prefWidth="370.0" vgap="5.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="ALWAYS" maxWidth="346.6666961669922" minWidth="290.600048828125" prefWidth="340.266650390625" />
                     </columnConstraints>
@@ -84,7 +75,6 @@
                               </ImageView>
                            </graphic></Label>
                         <PasswordField fx:id="textPass" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.rowIndex="5" />
-                        <CheckBox focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Recordar mi sesión" GridPane.rowIndex="6" />
                         <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#actionLogin" prefHeight="36.0" prefWidth="239.0" text="Iniciar Sesión" textAlignment="CENTER" GridPane.rowIndex="7" />
                      </children>
                   </GridPane>

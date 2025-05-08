@@ -1,0 +1,27 @@
+USE cafeteria;
+
+INSERT INTO tamano (tam_chico, tam_mediano, tam_grande, tam_jumbo, fecha_mod) VALUES
+(0.00, 5.00, 10.00, 15.00, NOW());
+
+INSERT INTO sabor (nombre, precio, fecha_registro, fecha_mod) VALUES
+('Regular', 0.0, NOW(), NOW()),
+('Vainilla', 5.00, NOW(), NOW()),
+('Chocolate', 5.50, NOW(), NOW()),
+('Caramelo', 6.00, NOW(), NOW()),
+('Avellana', 6.50, NOW(), NOW()),
+('Fresa', 5.50, NOW(), NOW()),
+('Coco', 6.00, NOW(), NOW()),
+('Almendra', 6.50, NOW(), NOW()),
+('Canela', 5.25, NOW(), NOW());
+
+INSERT INTO producto (nombre, precio, descripcion, temperatura, fecha_mod, imagen_ruta) VALUES
+('Latte', 60.00, 'Café con leche vaporizada', 'H', NOW(), '/uas/mtds/prototipo/products/latte.png'),
+('Americano', 35.00, 'Café negro intenso', 'H', NOW(), '/uas/mtds/prototipo/products/americano.png'),
+('Capuccino', 50.00, 'Espuma de leche con café', 'H', NOW(), '/uas/mtds/prototipo/products/capuchino.png'),
+('Frappé', 75.00, 'Café frío batido', 'C', NOW(), '/uas/mtds/prototipo/products/frappe.png'),
+('Mocca', 70.00, 'Café con chocolate', 'H', NOW(), '/uas/mtds/prototipo/products/moca.png'),
+('Té Chai', 55.00, 'Infusión de especias y leche', 'H', NOW(), '/uas/mtds/prototipo/products/chai.png'),
+('Cold Brew', 50.00, 'Café infusionado en frío', 'C', NOW(), '/uas/mtds/prototipo/products/coldbrew.png'),
+('Matcha Latte', 75.00, 'Té verde matcha con leche', 'H', NOW(), '/uas/mtds/prototipo/products/matchalatte.png'),
+('Expresso', 30.00, 'Doble carga de café puro', 'H', NOW(), '/uas/mtds/prototipo/products/espresso.png'),
+('Chocolate Caliente', 65.00, 'Bebida caliente de cacao', 'H', NOW(), '/uas/mtds/prototipo/products/chocolatecaliente.png');
