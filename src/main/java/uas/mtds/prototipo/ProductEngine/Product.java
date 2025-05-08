@@ -25,12 +25,12 @@ public class Product {
         try {
             InputStream stream = getClass().getResourceAsStream(rutaImagen);
             // Imagen por defecto si no se encuentra la ruta
-            this.imagen = new Image(Objects.requireNonNullElseGet(stream, () -> Objects.requireNonNull(getClass().getResourceAsStream("/uas/mtds/prototipo/products/product_default.png"))));
+            this.imagen = new Image(Objects.requireNonNullElseGet(stream, () -> Objects.requireNonNull(getClass().getResourceAsStream("/products/product_default.png"))));
         } catch (Exception e) {
             Logger logger = Logger.getLogger(Product.class.getName());
             logger.log(Level.SEVERE, "Error al cargar productos: ", e);
             // Imagen por defecto en caso de error
-            this.imagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uas/mtds/prototipo/products/product_default.png")));
+            this.imagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/products/product_default.png")));
         }
         //this.imagen = new Image(rutaImagen);
     }

@@ -1,4 +1,4 @@
-package uas.mtds.prototipo;
+package uas.mtds.prototipo.Controllers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

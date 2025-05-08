@@ -15,62 +15,60 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uas.mtds.prototipo.EditController">
-   <children>
-      <HBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
-         <children>
-            <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
-               <image>
-                  <Image url="@images/carrito-de-compras.png" />
-               </image>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </ImageView>
-            <GridPane prefWidth="350.0" vgap="10.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.73330688476562" minWidth="10.0" prefWidth="89.60001220703126" />
-                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="282.39996337890625" minWidth="10.0" prefWidth="260.79998779296875" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Producto">
-                     <font>
-                        <Font name="Roboto Medium" size="14.0" />
-                     </font>
-                  </Label>
-                  <ComboBox fx:id="comboBoxProductos" prefWidth="300.0" GridPane.columnIndex="1" />
-                  <Label text="Cantidad" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Roboto Medium" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label text="Notas" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="Roboto Medium" size="14.0" />
-                     </font>
-                  </Label>
-                  <TextArea fx:id="textAreaNotas" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS" />
-                  <Button fx:id="buttonGuardar" alignment="CENTER" mnemonicParsing="false" prefHeight="14.0" prefWidth="142.0" text="Guardar" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                     <font>
-                        <Font name="Roboto Medium" size="16.0" />
-                     </font>
-                  </Button>
-                  <Spinner fx:id="spinnerCantidad" editable="true" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-               </children>
-            </GridPane>
-         </children>
-         <VBox.margin>
-            <Insets />
-         </VBox.margin>
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
-      </HBox>
-   </children>
+<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="uas.mtds.prototipo.Controllers.EditController">
+    <HBox alignment="CENTER" spacing="50.0" VBox.vgrow="ALWAYS">
+        <VBox.margin>
+            <Insets/>
+        </VBox.margin>
+        <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        </padding>
+        <ImageView fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="NEVER">
+            <HBox.margin>
+                <Insets/>
+            </HBox.margin>
+            <Image url="@images/carrito-de-compras.png"/>
+        </ImageView>
+        <GridPane prefWidth="350.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.73330688476562" minWidth="10.0"
+                                   prefWidth="89.60001220703126"/>
+                <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="282.39996337890625" minWidth="10.0"
+                                   prefWidth="260.79998779296875"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES"/>
+            </rowConstraints>
+            <Label alignment="TOP_CENTER" contentDisplay="CENTER" text="Producto">
+                <font>
+                    <Font name="Roboto Medium" size="14.0"/>
+                </font>
+            </Label>
+            <ComboBox fx:id="comboBoxProductos" prefWidth="300.0" GridPane.columnIndex="1"/>
+            <Label text="Cantidad" GridPane.rowIndex="1">
+                <font>
+                    <Font name="Roboto Medium" size="14.0"/>
+                </font>
+            </Label>
+            <Label text="Notas" GridPane.rowIndex="2">
+                <font>
+                    <Font name="Roboto Medium" size="14.0"/>
+                </font>
+            </Label>
+            <TextArea fx:id="textAreaNotas" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                      GridPane.vgrow="ALWAYS"/>
+            <Button fx:id="buttonGuardar" alignment="CENTER" mnemonicParsing="false" prefHeight="14.0"
+                    prefWidth="142.0" text="Guardar" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <font>
+                    <Font name="Roboto Medium" size="16.0"/>
+                </font>
+            </Button>
+            <Spinner fx:id="spinnerCantidad" editable="true" prefWidth="300.0" GridPane.columnIndex="1"
+                     GridPane.rowIndex="1"/>
+        </GridPane>
+    </HBox>
 </VBox>
