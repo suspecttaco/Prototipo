@@ -1,4 +1,4 @@
-package uas.mtds.prototipo;
+package uas.mtds.prototipo.Controllers;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -152,7 +152,7 @@ public class PosController {
     public void actionCobrar(ActionEvent event) throws IOException {
         Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("2-PAGO.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/2-PAGO.fxml"));
         Parent root = loader.load();
 
         PayController payController = loader.getController();
@@ -172,7 +172,7 @@ public class PosController {
     public void actionCancelar(ActionEvent event) throws IOException {
         Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("3-CANCELAR.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/3-CANCELAR.fxml"));
         Parent root = loader.load();
 
         AuthController authController = loader.getController();
@@ -192,7 +192,7 @@ public class PosController {
         Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("4-CLIENTES.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/4-CLIENTES.fxml")));
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.setTitle("Gestion de clientes");
@@ -206,7 +206,7 @@ public class PosController {
         Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("5-CUPONES.fxml")));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/5-CUPONES.fxml")));
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.setTitle("Descuento");
@@ -220,7 +220,7 @@ public class PosController {
         Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Stage stage = new Stage();
-        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("8-BUSCAR.fxml"))));
+        Parent root = FXMLLoader.load((Objects.requireNonNull(getClass().getResource("/8-BUSCAR.fxml"))));
         stage.setScene(new Scene(root));
         stage.setResizable(false);
         stage.setTitle("Inventario");
@@ -233,7 +233,7 @@ public class PosController {
     public void actionEditarPedido(ActionEvent event) throws IOException {
         Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("6-EDITARV.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/6-EDITARV.fxml"));
         Parent root = loader.load();
 
         EditController editController = loader.getController();
@@ -263,7 +263,7 @@ public class PosController {
 
         if (currentStage != null) {
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("9-CORTE.fxml")));
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/9-CORTE.fxml")));
             stage.setScene(new Scene(root));
             stage.setResizable(false);
             stage.setTitle("Finalizar Jornada");
@@ -322,7 +322,7 @@ public class PosController {
                 currentStage.close();
 
                 Stage loginStage = new Stage();
-                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("7-LOGIN.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/7-LOGIN.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 loginStage.setTitle("Login");
                 loginStage.setScene(scene);
@@ -351,7 +351,7 @@ public class PosController {
     }
 
     /**
-     * Método público para actualizar los productos desde otra clase
+     * Metodo público para actualizar los productos desde otra clase
      *
      * @param products Lista de productos para mostrar
      */
@@ -367,7 +367,7 @@ public class PosController {
     }
 
     /**
-     * Método privado para actualizar la interfaz con los productos
+     * Metodo privado para actualizar la interfaz con los productos
      */
     private void mostrarProductosEnGrid() {
         gridProductos.getChildren().clear();
@@ -410,7 +410,7 @@ private VBox crearElementoProducto(Product producto) {
     // Manejador de clic
     elementoProducto.setOnMouseClicked(_ -> {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("10-EDITARP.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/10-EDITARP.fxml"));
             Parent root = loader.load();
 
             ModController modController = loader.getController();

@@ -10,4 +10,6 @@ module uas.mtds.prototipo {
 
     opens uas.mtds.prototipo to javafx.fxml;
     exports uas.mtds.prototipo;
+    exports uas.mtds.prototipo.Controllers;
+    opens uas.mtds.prototipo.Controllers to javafx.fxml;
 }

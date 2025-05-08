@@ -1,4 +1,4 @@
-package uas.mtds.prototipo;
+package uas.mtds.prototipo.Controllers;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 
 @SuppressWarnings("ClassEscapesDefinedScope")
 public class PayController {
+    public ToggleGroup Pagos;
     //TextFields
     @FXML
     private TextField textSubtotal;
@@ -88,7 +89,7 @@ public class PayController {
 
     @FXML
     private void cobrarPedido() {
-        // Obtener método de pago seleccionado
+        // Obtener metodo de pago seleccionado
         String metodoPago = "";
         if (toggleTarjeta.isSelected()) {
             metodoPago = "Tarjeta";

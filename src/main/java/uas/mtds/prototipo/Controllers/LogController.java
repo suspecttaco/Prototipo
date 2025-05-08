@@ -1,4 +1,4 @@
-package uas.mtds.prototipo;
+package uas.mtds.prototipo.Controllers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -60,7 +60,7 @@ public class LogController {
             Stage root = (Stage) ((Node) event.getSource()).getScene().getWindow();
             root.close();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("1-POS.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/1-POS.fxml"));
             Stage stage = new Stage();
             Scene scene = new Scene(fxmlLoader.load());
             stage.setTitle("Punto de venta");

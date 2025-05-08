@@ -21,13 +21,13 @@ VALUES
 
 INSERT INTO producto (nombre, precio, descripcion, imagen_ruta)
 VALUES
-    ('Latte', 60.00, 'Café con leche vaporizada', '/uas/mtds/prototipo/products/latte.png'),
-    ('Americano', 35.00, 'Café negro intenso', '/uas/mtds/prototipo/products/americano.png'),
-    ('Capuccino', 50.00, 'Espuma de leche con café', '/uas/mtds/prototipo/products/capuchino.png'),
-    ('Frappé', 75.00, 'Café frío batido', '/uas/mtds/prototipo/products/frappe.png'),
-    ('Mocca', 70.00, 'Café con chocolate', '/uas/mtds/prototipo/products/moca.png'),
-    ('Té Chai', 55.00, 'Infusión de especias y leche', '/uas/mtds/prototipo/products/chai.png'),
-    ('Cold Brew', 50.00, 'Café infusionado en frío', '/uas/mtds/prototipo/products/coldbrew.png'),
-    ('Matcha Latte', 75.00, 'Té verde matcha con leche', '/uas/mtds/prototipo/products/matchalatte.png'),
-    ('Expresso', 30.00, 'Doble carga de café puro', '/uas/mtds/prototipo/products/espresso.png'),
-    ('Chocolate Caliente', 65.00, 'Bebida caliente de cacao', '/uas/mtds/prototipo/products/chocolatecaliente.png');
+    ('Latte', 60.00, 'Café con leche vaporizada', '/products/latte.png'),
+    ('Americano', 35.00, 'Café negro intenso', '/products/americano.png'),
+    ('Capuccino', 50.00, 'Espuma de leche con café', '/products/capuchino.png'),
+    ('Frappé', 75.00, 'Café frío batido', '/products/frappe.png'),
+    ('Mocca', 70.00, 'Café con chocolate', '/products/moca.png'),
+    ('Té Chai', 55.00, 'Infusión de especias y leche', '/products/chai.png'),
+    ('Cold Brew', 50.00, 'Café infusionado en frío', '/products/coldbrew.png'),
+    ('Matcha Latte', 75.00, 'Té verde matcha con leche', '/products/matchalatte.png'),
+    ('Expresso', 30.00, 'Doble carga de café puro', '/products/espresso.png'),
+    ('Chocolate Caliente', 65.00, 'Bebida caliente de cacao', '/products/chocolatecaliente.png');

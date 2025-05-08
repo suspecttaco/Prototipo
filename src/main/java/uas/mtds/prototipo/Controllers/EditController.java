@@ -1,4 +1,4 @@
-package uas.mtds.prototipo;
+package uas.mtds.prototipo.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;

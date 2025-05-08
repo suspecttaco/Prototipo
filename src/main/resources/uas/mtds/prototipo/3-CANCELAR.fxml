@@ -44,38 +44,33 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="444.0" prefWidth="374.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uas.mtds.prototipo.AuthController">
-   <children>
-      <Separator prefWidth="200.0" />
-      <VBox alignment="CENTER">
-         <children>
-            <Label text="¡Atencion!">
-               <font>
-                  <Font size="29.0" />
-               </font>
-            </Label>
-            <Label text="Se necesita verificacion para cancelar la compra" textAlignment="CENTER" wrapText="true" />
-         </children>
-      </VBox>
-      <ImageView fx:id="img_usuario" fitHeight="192.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true" VBox.vgrow="SOMETIMES">
-         <image>
-            <Image url="@images/ingeniero-de-software.png" />
-         </image></ImageView>
-      <HBox alignment="CENTER" spacing="10.0" />
-      <Label text="Usuario" />
-      <TextField fx:id="textfield_Usuario" />
-      <Label text="Contraseña" />
-      <PasswordField fx:id="passw_Usuario" />
-      <HBox />
-      <HBox alignment="CENTER" spacing="10.0">
-         <children>
-            <Button fx:id="btn_Autorizar" mnemonicParsing="false" prefHeight="37.0" prefWidth="98.0" text="Autorizar" />
-            <Button fx:id="btn_Regresar" mnemonicParsing="false" prefHeight="37.0" prefWidth="98.0" text="Regresar" />
-         </children>
-      </HBox>
-      <Separator prefWidth="200.0" />
-   </children>
+<VBox alignment="CENTER" prefHeight="444.0" prefWidth="374.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="uas.mtds.prototipo.Controllers.AuthController">
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
    </padding>
+   <Separator prefWidth="200.0"/>
+   <VBox alignment="CENTER">
+      <Label text="¡Atencion!">
+         <font>
+            <Font size="29.0"/>
+         </font>
+      </Label>
+      <Label text="Se necesita verificacion para cancelar la compra" textAlignment="CENTER" wrapText="true"/>
+   </VBox>
+   <ImageView fitHeight="192.0" fitWidth="183.0" pickOnBounds="true" preserveRatio="true"
+              VBox.vgrow="SOMETIMES">
+      <Image url="@images/ingeniero-de-software.png"/>
+   </ImageView>
+   <HBox alignment="CENTER" spacing="10.0"/>
+   <Label text="Usuario"/>
+   <TextField fx:id="textfield_Usuario"/>
+   <Label text="Contraseña"/>
+   <PasswordField fx:id="passw_Usuario"/>
+   <HBox/>
+   <HBox alignment="CENTER" spacing="10.0">
+      <Button fx:id="btn_Autorizar" mnemonicParsing="false" prefHeight="37.0" prefWidth="98.0" text="Autorizar"/>
+      <Button fx:id="btn_Regresar" mnemonicParsing="false" prefHeight="37.0" prefWidth="98.0" text="Regresar"/>
+   </HBox>
+   <Separator prefWidth="200.0"/>
 </VBox>
