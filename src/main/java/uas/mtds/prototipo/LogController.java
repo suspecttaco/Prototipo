@@ -16,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LogController {
     @FXML
@@ -46,7 +48,8 @@ public class LogController {
                             && c.getPassword().equals(password));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger logger = Logger.getLogger(LogController.class.getName());
+            logger.log(Level.SEVERE, "Error al cargar productos: ", e);
             return false;
         }
     }

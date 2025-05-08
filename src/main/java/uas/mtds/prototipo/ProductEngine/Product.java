@@ -3,19 +3,20 @@ package uas.mtds.prototipo.ProductEngine;
 import javafx.scene.image.Image;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Product {
-    private final String id;
+
+    private final int id;
     private final String nombre;
     private final double precio;
-    private String descripcion;
-
+    private final String descripcion;
     private Image imagen;
-
     private int unidad;
     private String notas;
 
-    public Product(String id, String nombre, double precio, String rutaImagen, String descripcion) {
+    public Product(int id, String nombre, double precio, String rutaImagen, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
@@ -26,7 +27,8 @@ public class Product {
             // Imagen por defecto si no se encuentra la ruta
             this.imagen = new Image(Objects.requireNonNullElseGet(stream, () -> Objects.requireNonNull(getClass().getResourceAsStream("/uas/mtds/prototipo/products/product_default.png"))));
         } catch (Exception e) {
-            System.err.println("Error al cargar la imagen: " + rutaImagen + " - " + e.getMessage());
+            Logger logger = Logger.getLogger(Product.class.getName());
+            logger.log(Level.SEVERE, "Error al cargar productos: ", e);
             // Imagen por defecto en caso de error
             this.imagen = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/uas/mtds/prototipo/products/product_default.png")));
         }
@@ -34,7 +36,7 @@ public class Product {
     }
 
     // Getters y setters
-    public String getId() {
+    public int getId() {
         return id;
     }
 

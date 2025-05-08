@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@SuppressWarnings("ClassEscapesDefinedScope")
 public class PayController {
     //TextFields
     @FXML
@@ -46,7 +47,7 @@ public class PayController {
         this.posController = posController;
     }
 
-    public void cargarResumen(ObservableList<Product> pedidoProductos, ObservableList<ConceptoImporte> listaImportes) {
+    public void cargarResumen(ObservableList<Product> pedidoProductos, @SuppressWarnings("ClassEscapesDefinedScope") ObservableList<ConceptoImporte> listaImportes) {
         // Configurar columnas de la tabla
         columnConcepto.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().concepto()));
         columnMonto.setCellValueFactory(data -> new SimpleStringProperty(String.format("%.2f", data.getValue().monto())));

@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import uas.mtds.prototipo.ProductEngine.Product;
 
+@SuppressWarnings("ClassEscapesDefinedScope")
 public class ModController {
     @FXML
     private TitledPane tabSize;

@@ -32,6 +32,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("ClassEscapesDefinedScope")
 public class PosController {
     //Hora & Fecha
     @FXML
@@ -143,11 +144,7 @@ public class PosController {
         try {
             actionSalir();
         } catch (IOException e) {
-            Alert alerta = new Alert(Alert.AlertType.ERROR);
-            alerta.setTitle("Error");
-            alerta.setHeaderText("Ocurrió un error inesperado");
-            alerta.setContentText(e.getMessage());
-            alerta.showAndWait();
+            mostrarError(e.getMessage());
         }
     }
 
@@ -411,7 +408,7 @@ private VBox crearElementoProducto(Product producto) {
     elementoProducto.getChildren().addAll(imageView, nombreText, precioText);
 
     // Manejador de clic
-    elementoProducto.setOnMouseClicked(event -> {
+    elementoProducto.setOnMouseClicked(_ -> {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("10-EDITARP.fxml"));
             Parent root = loader.load();
@@ -427,7 +424,7 @@ private VBox crearElementoProducto(Product producto) {
             stage.initOwner(elementoProducto.getScene().getWindow());
 
             // Manejar el resultado de la edición
-            stage.setOnHiding(windowEvent -> {
+            stage.setOnHiding(_ -> {
                 Product productoModificado = modController.getProduct();
                 if (productoModificado != null) {
                     agregarProductoAlPedido(productoModificado);
@@ -437,25 +434,25 @@ private VBox crearElementoProducto(Product producto) {
             stage.show();
 
         } catch (IOException e) {
-            mostrarError("Error al abrir ventana de edición", e.getMessage());
+            mostrarError(e.getMessage());
         }
     });
 
     // Efecto hover
-    elementoProducto.setOnMouseEntered(e ->
+    elementoProducto.setOnMouseEntered(_ ->
         elementoProducto.setStyle("-fx-background-color: #e0e0e0; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;")
     );
 
-    elementoProducto.setOnMouseExited(e ->
+    elementoProducto.setOnMouseExited(_ ->
         elementoProducto.setStyle("-fx-background-color: #f4f4f4; -fx-border-radius: 5; -fx-background-radius: 5; -fx-cursor: hand;")
     );
 
     return elementoProducto;
 }
 
-private void mostrarError(String titulo, String mensaje) {
+private void mostrarError(String mensaje) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle(titulo);
+    alert.setTitle("Error");
     alert.setHeaderText(null);
     alert.setContentText(mensaje);
     alert.showAndWait();
@@ -464,7 +461,7 @@ private void mostrarError(String titulo, String mensaje) {
     private void agregarProductoAlPedido(Product producto) {
         // Buscar producto en la lista de productos
         for (Product p : pedidoProductos) {
-            if (p.getId().equals(producto.getId())) {
+            if (p.getId() == producto.getId()) {
                 p.addUnidad(1);
                 tablePedido.refresh();
                 actualizarImportes();

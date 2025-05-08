@@ -8,8 +8,8 @@ import uas.mtds.prototipo.ProductEngine.Product;
 
 import java.util.List;
 
+@SuppressWarnings("ClassEscapesDefinedScope")
 public class EditController {
-
     @FXML
     private ComboBox<Product> comboBoxProductos;
     @FXML

@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class AuthController {
     @FXML
@@ -83,7 +85,8 @@ public class AuthController {
                     && c.getPassword().equals(password));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger logger = Logger.getLogger(AuthController.class.getName());
+            logger.log(Level.SEVERE, "Error al cargar productos: ", e);
             return false;
         }
     }
